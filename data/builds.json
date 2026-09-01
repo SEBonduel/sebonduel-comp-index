@@ -17,6 +17,16 @@
     "equipment": [
       { "label": "Assaut", "slots": ["Stabilisateur vertical", "Fouloir de canon", "Turbocompresseur"] },
       { "label": "Mobilité", "slots": ["Stabilisateur vertical", "Crampons de chenilles", "Turbocompresseur"] }
+    ],
+    "fieldModsTree": [
+      { "left": "Rotation de tourelle", "right": "Rotation de caisse", "pick": "left" },
+      { "left": "Temps de visée", "right": "Dispersion en mouvement", "pick": "right" },
+      { "left": "Vitesse de rechargement", "right": "Précision", "pick": "left" },
+      { "left": "Puissance moteur", "right": "Résistance au terrain", "pick": "right" },
+      { "left": "Portée de vue", "right": "Camouflage", "pick": "left" },
+      { "left": "Réserve de PV", "right": "Vitesse de réparation", "pick": "right" },
+      { "left": "Puissance de feu", "right": "Survie", "pick": "right" },
+      { "left": "Puissance de feu", "right": "Détection", "pick": "left" }
     ]
   }
 }
