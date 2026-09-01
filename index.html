@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEBonduel - Index Compétitif Tier X (World of Tanks)</title>
+<style>
+  :root {
+    --bg: #0e1014; --bg2: #14171d; --panel: #191d25; --panel2: #20252f;
+    --line: #2b313c; --txt: #e7ebf1; --muted: #8b95a5; --accent: #f1c40f;
+    --accent2: #e74c3c; --green: #2ecc71; --blue: #3498db;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: radial-gradient(1200px 600px at 50% -10%, #1a1f28 0%, var(--bg) 60%);
+    color: var(--txt); font: 15px/1.5 system-ui, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+  }
+  a { color: var(--accent); }
+  header {
+    padding: 22px 20px 10px; text-align: center;
+  }
+  header h1 { margin: 0; font-size: 22px; letter-spacing: .3px; }
+  header h1 b { color: var(--accent); }
+  header .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  header .by { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  header .by b { color: var(--accent); }
+
+  .toolbar {
+    max-width: 1200px; margin: 14px auto 0; padding: 0 16px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .search {
+    width: 100%; background: var(--panel); border: 1px solid var(--line);
+    color: var(--txt); border-radius: 10px; padding: 12px 14px; font-size: 15px;
+  }
+  .search:focus { outline: none; border-color: var(--accent); }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .filters .grp { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill {
+    background: var(--panel); border: 1px solid var(--line); color: var(--muted);
+    border-radius: 20px; padding: 5px 12px; font-size: 12px; cursor: pointer;
+    user-select: none; transition: .12s; white-space: nowrap;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--txt); }
+  .pill.on { background: var(--accent); border-color: var(--accent); color: #17140a; font-weight: 600; }
+  .sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 4px; }
+  .count { color: var(--muted); font-size: 12px; margin-left: auto; }
+
+  .grid {
+    max-width: 1200px; margin: 18px auto 60px; padding: 0 16px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px;
+  }
+  .card {
+    background: linear-gradient(180deg, var(--panel) 0%, var(--bg2) 100%);
+    border: 1px solid var(--line); border-radius: 12px; padding: 10px;
+    cursor: pointer; transition: .12s; position: relative; overflow: hidden;
+    min-height: 150px; display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  /* Image du char en grand, en arrière-plan (façon skill4ltu) */
+  .card .bg {
+    position: absolute; inset: 0; background-repeat: no-repeat;
+    background-position: center 38%; background-size: 118%;
+    opacity: .9; filter: drop-shadow(0 4px 8px rgba(0,0,0,.6));
+  }
+  .card::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(14,16,20,0) 40%, rgba(14,16,20,.55) 68%, var(--bg2) 100%);
+  }
+  .card .nm, .card .badges, .card .dot { position: relative; z-index: 1; }
+  .card .nm { font-size: 13px; font-weight: 700; text-align: center; margin-top: 6px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    text-shadow: 0 1px 4px rgba(0,0,0,.9); }
+  .card .badges { display: flex; gap: 5px; justify-content: center; margin-top: 5px; flex-wrap: wrap; }
+  .badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; background: var(--panel2);
+    color: var(--muted); border: 1px solid var(--line); }
+  .badge.prem { color: var(--accent); border-color: #4a3d0e; background: #241f0a; }
+  .card .dot { position: absolute; top: 8px; right: 8px; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--line); }
+  .card .dot.ok { background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .empty { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px; }
+
+  /* Modale détail */
+  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.7); display: none;
+    align-items: flex-start; justify-content: center; padding: 30px 16px; z-index: 50;
+    overflow-y: auto; }
+  .backdrop.open { display: flex; }
+  .modal { background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    max-width: 640px; width: 100%; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+  .modal .top { display: flex; gap: 14px; align-items: center; padding: 18px 20px;
+    border-bottom: 1px solid var(--line); }
+  .modal .top img { height: 64px; object-fit: contain; filter: drop-shadow(0 3px 6px rgba(0,0,0,.5)); }
+  .modal .top .h { flex: 1; }
+  .modal .top h2 { margin: 0; font-size: 20px; }
+  .modal .top .badges { margin-top: 6px; }
+  .modal .close { background: none; border: none; color: var(--muted); font-size: 26px;
+    cursor: pointer; line-height: 1; padding: 0 4px; }
+  .modal .close:hover { color: var(--txt); }
+  .body { padding: 8px 20px 20px; }
+  .section { margin-top: 16px; }
+  .section h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin: 0 0 8px; display: flex; align-items: center; gap: 6px; }
+  .setup-label { font-size: 12px; color: var(--accent); font-weight: 600; margin: 10px 0 5px; }
+  .setup-label:first-child { margin-top: 0; }
+  .slots { display: flex; flex-wrap: wrap; gap: 8px; }
+  .slot { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 12px; font-size: 14px; font-weight: 600; }
+  .slot.num::before { content: attr(data-n); color: var(--accent); margin-right: 8px; font-weight: 700; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { background: var(--panel2); border: 1px solid var(--line); border-radius: 16px;
+    padding: 4px 11px; font-size: 13px; }
+  .ammo { font-size: 15px; font-weight: 600; }
+  .note { background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px;
+    padding: 10px 14px; color: var(--txt); font-size: 14px; white-space: pre-wrap; }
+  .todo { color: var(--muted); font-style: italic; padding: 8px 0; }
+  .armor { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+    background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+    padding: 9px 14px; font-size: 13px; text-decoration: none; color: var(--txt); }
+  .armor:hover { border-color: var(--accent); }
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1><b>Index Compétitif</b> - Tier X</h1>
+  <div class="sub">Équipements, directives, équipage et consommables pour le jeu en équipe (World of Tanks)</div>
+  <div class="by">par <b>SEBonduel</b></div>
+</header>
+
+<div class="toolbar">
+  <input type="text" id="search" class="search" placeholder="Rechercher un char par nom…" autocomplete="off">
+  <div class="filters">
+    <div class="grp" id="nationFilters"></div>
+    <div class="sep"></div>
+    <div class="grp" id="typeFilters"></div>
+    <div class="sep"></div>
+    <div class="pill" id="onlyBuilds">✓ Avec build</div>
+    <div class="count" id="count"></div>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="backdrop" id="backdrop">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer>Données chars : API Wargaming · Builds : SEBonduel · non affilié à Wargaming.net</footer>
+
+<script>
+"use strict";
+(function () {
+  const el = (id) => document.getElementById(id);
+  const state = { tanks: [], builds: {}, nation: "", type: "", q: "", onlyBuilds: false };
+
+  const TYPE_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
+  const TYPE_FR = { heavyTank: "Lourd", mediumTank: "Moyen", lightTank: "Léger",
+                    "AT-SPG": "Chasseur", SPG: "Arty" };
+
+  const norm = (s) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+  // equipment accepte : 3 chaînes à plat OU [{label, slots[3]}] (1 ou 2 compos).
+  function equipSetups(equipment) {
+    if (!equipment || !equipment.length) return [];
+    if (typeof equipment[0] === "string") {
+      return equipment.some(Boolean) ? [{ label: "", slots: equipment.filter(Boolean) }] : [];
+    }
+    return equipment
+      .filter((s) => s && (s.slots || []).some(Boolean))
+      .map((s) => ({ label: s.label || "", slots: (s.slots || []).filter(Boolean) }));
+  }
+  const hasBuild = (slug) => {
+    const b = state.builds[slug];
+    return !!(b && (equipSetups(b.equipment).length || b.note ||
+      b.crew?.length || b.consumables?.length || b.fieldMods?.length || b.ammo));
+  };
+
+  function buildFilters() {
+    const nations = [...new Set(state.tanks.map((t) => t.nation))]
+      .sort((a, b) => state.tanks.find((t) => t.nation === a).nation_fr
+        .localeCompare(state.tanks.find((t) => t.nation === b).nation_fr));
+    const nf = el("nationFilters");
+    nations.forEach((n) => {
+      const fr = state.tanks.find((t) => t.nation === n).nation_fr;
+      const p = document.createElement("div");
+      p.className = "pill"; p.textContent = fr;
+      p.onclick = () => { state.nation = state.nation === n ? "" : n; sync(); };
+      p.dataset.nation = n;
+      nf.appendChild(p);
+    });
+    const tf = el("typeFilters");
+    TYPE_ORDER.filter((ty) => state.tanks.some((t) => t.type === ty)).forEach((ty) => {
+      const p = document.createElement("div");
+      p.className = "pill"; p.textContent = TYPE_FR[ty];
+      p.onclick = () => { state.type = state.type === ty ? "" : ty; sync(); };
+      p.dataset.type = ty;
+      tf.appendChild(p);
+    });
+  }
+
+  function sync() {
+    document.querySelectorAll("#nationFilters .pill").forEach((p) =>
+      p.classList.toggle("on", p.dataset.nation === state.nation));
+    document.querySelectorAll("#typeFilters .pill").forEach((p) =>
+      p.classList.toggle("on", p.dataset.type === state.type));
+    el("onlyBuilds").classList.toggle("on", state.onlyBuilds);
+    render();
+  }
+
+  function render() {
+    const q = norm(state.q);
+    const list = state.tanks.filter((t) =>
+      (!state.nation || t.nation === state.nation) &&
+      (!state.type || t.type === state.type) &&
+      (!state.onlyBuilds || hasBuild(t.slug)) &&
+      (!q || norm(t.name).includes(q)));
+    const g = el("grid");
+    g.innerHTML = "";
+    el("count").textContent = `${list.length} char${list.length > 1 ? "s" : ""}`;
+    if (!list.length) { g.innerHTML = '<div class="empty">Aucun char pour ces filtres.</div>'; return; }
+    for (const t of list) {
+      const c = document.createElement("div");
+      c.className = "card";
+      c.innerHTML =
+        `<div class="bg" style="background-image:url('${t.icon}')"></div>` +
+        `<div class="dot ${hasBuild(t.slug) ? "ok" : ""}"></div>` +
+        `<div class="nm">${t.name}</div>` +
+        `<div class="badges"><span class="badge">${t.nation_fr}</span>` +
+        `<span class="badge">${TYPE_FR[t.type] || t.type_fr}</span>` +
+        (t.premium ? `<span class="badge prem">Prem</span>` : "") + `</div>`;
+      c.onclick = () => openModal(t);
+      g.appendChild(c);
+    }
+  }
+
+  function slots(arr) {
+    return `<div class="slots">` + arr.map((s, i) =>
+      `<div class="slot num" data-n="${i + 1}">${s}</div>`).join("") + `</div>`;
+  }
+  function chips(arr) {
+    return `<div class="chips">` + arr.map((s) => `<span class="chip">${s}</span>`).join("") + `</div>`;
+  }
+
+  function openModal(t) {
+    const b = state.builds[t.slug] || {};
+    const armor = `https://tanks.gg/tank/${t.slug}/model`;
+    let html =
+      `<div class="top">` +
+      `<img src="${t.icon}" alt="${t.name}">` +
+      `<div class="h"><h2>${t.name}</h2>` +
+      `<div class="badges"><span class="badge">${t.nation_fr}</span>` +
+      `<span class="badge">${t.type_fr}</span>` +
+      (t.premium ? `<span class="badge prem">Premium</span>` : "") + `</div></div>` +
+      `<button class="close" title="Fermer">×</button></div>` +
+      `<div class="body">`;
+
+    const setups = equipSetups(b.equipment);
+    const any = setups.length || b.fieldMods?.length || b.crew?.length ||
+      b.consumables?.length || b.ammo || b.note;
+    if (!any) {
+      html += `<div class="todo">🔧 Build compétitif à venir pour ce char.</div>`;
+    } else {
+      if (setups.length) {
+        const multi = setups.length > 1;
+        const blocks = setups.map((s) =>
+          (multi || s.label ? `<div class="setup-label">${s.label || "Compo"}</div>` : "") +
+          slots(s.slots)).join("");
+        html += `<div class="section"><h3>🔧 Équipements${multi ? " (2 compos)" : ""}</h3>${blocks}</div>`;
+      }
+      if (b.fieldMods?.length)
+        html += `<div class="section"><h3>🛠️ Directives de terrain</h3>${chips(b.fieldMods)}</div>`;
+      if (b.crew?.length)
+        html += `<div class="section"><h3>🎖️ Compétences équipage (ordre)</h3>${slots(b.crew)}</div>`;
+      if (b.consumables?.length)
+        html += `<div class="section"><h3>🧰 Consommables</h3>${chips(b.consumables)}</div>`;
+      if (b.ammo)
+        html += `<div class="section"><h3>💥 Obus</h3><div class="ammo">${b.ammo}</div></div>`;
+      if (b.note)
+        html += `<div class="section"><h3>📝 Note</h3><div class="note">${b.note}</div></div>`;
+    }
+    html += `<a class="armor" href="${armor}" target="_blank" rel="noopener">🛡️ Voir le blindage 3D sur tanks.gg ↗</a>`;
+    html += `</div>`;
+
+    el("modal").innerHTML = html;
+    el("modal").querySelector(".close").onclick = closeModal;
+    el("backdrop").classList.add("open");
+  }
+  function closeModal() { el("backdrop").classList.remove("open"); }
+
+  el("search").addEventListener("input", (e) => { state.q = e.target.value; render(); });
+  el("onlyBuilds").addEventListener("click", () => { state.onlyBuilds = !state.onlyBuilds; sync(); });
+  el("backdrop").addEventListener("click", (e) => { if (e.target === el("backdrop")) closeModal(); });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+  Promise.all([
+    fetch("data/tanks.json").then((r) => r.json()),
+    fetch("data/builds.json").then((r) => r.json()).catch(() => ({})),
+  ]).then(([tanks, builds]) => {
+    state.tanks = tanks;
+    delete builds._schema;
+    state.builds = builds;
+    buildFilters();
+    render();
+  });
+})();
+</script>
+</body>
+</html>
