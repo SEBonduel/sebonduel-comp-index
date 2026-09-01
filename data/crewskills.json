@@ -1,0 +1,294 @@
+[
+  {
+    "name": "Armurier",
+    "skill": "gunner_armorer",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_armorer.png"
+  },
+  {
+    "name": "As du volant",
+    "skill": "driver_virtuoso",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_virtuoso.png"
+  },
+  {
+    "name": "Brouillage",
+    "skill": "radioman_interference",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/radioman_interference.png"
+  },
+  {
+    "name": "Bélier",
+    "skill": "driver_rammingMaster",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_rammingMaster.png"
+  },
+  {
+    "name": "Charge parfaite",
+    "skill": "loader_perfectCharge",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_perfectCharge.png"
+  },
+  {
+    "name": "Combat rapproché",
+    "skill": "loader_melee",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_melee.png"
+  },
+  {
+    "name": "Concentration",
+    "skill": "gunner_focus",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_focus.png"
+  },
+  {
+    "name": "Conduite souple",
+    "skill": "driver_smoothDriving",
+    "aliases": [
+      "conduite souple"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_smoothDriving.png"
+  },
+  {
+    "name": "Coordination",
+    "skill": "commander_coordination",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_coordination.png"
+  },
+  {
+    "name": "Coup mortel",
+    "skill": "gunner_sniper",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_sniper.png"
+  },
+  {
+    "name": "Côte à côte",
+    "skill": "radioman_sideBySide",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/radioman_sideBySide.png"
+  },
+  {
+    "name": "Dissimulation",
+    "skill": "camouflage",
+    "aliases": [
+      "camo",
+      "camouflage"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/camouflage.png"
+  },
+  {
+    "name": "Détecteur de menaces",
+    "skill": "radioman_threatSearch",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/radioman_threatSearch.png"
+  },
+  {
+    "name": "Détection sonore",
+    "skill": "commander_enemyShotPredictor",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_enemyShotPredictor.png"
+  },
+  {
+    "name": "Expert en communications",
+    "skill": "radioman_expert",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/radioman_expert.png"
+  },
+  {
+    "name": "Forte tête",
+    "skill": "radioman_battleTempered",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/radioman_battleTempered.png"
+  },
+  {
+    "name": "Frères d'armes",
+    "skill": "brotherhood",
+    "aliases": [
+      "bia",
+      "freres d'armes",
+      "frères d'armes",
+      "fraternite"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/brotherhood.png"
+  },
+  {
+    "name": "Ingénieur",
+    "skill": "driver_motorExpert",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_motorExpert.png"
+  },
+  {
+    "name": "Interception du signal",
+    "skill": "radioman_signalInterception",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/radioman_signalInterception.png"
+  },
+  {
+    "name": "Intuition",
+    "skill": "loader_intuition",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_intuition.png"
+  },
+  {
+    "name": "Longue-vue",
+    "skill": "radioman_finder",
+    "aliases": [
+      "détection",
+      "detection",
+      "traqueur"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/radioman_finder.png"
+  },
+  {
+    "name": "Loup solitaire",
+    "skill": "gunner_loneWolf",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_loneWolf.png"
+  },
+  {
+    "name": "Maîtrise du barillet",
+    "skill": "loader_magMastery",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_magMastery.png"
+  },
+  {
+    "name": "Mentor",
+    "skill": "commander_tutor",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_tutor.png"
+  },
+  {
+    "name": "Pare-balles",
+    "skill": "driver_bulletproof",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_bulletproof.png"
+  },
+  {
+    "name": "Pilote tout-terrain",
+    "skill": "driver_badRoadsKing",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_badRoadsKing.png"
+  },
+  {
+    "name": "Placement fiable",
+    "skill": "driver_reliablePlacement",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_reliablePlacement.png"
+  },
+  {
+    "name": "Poussée d'adrénaline",
+    "skill": "loader_desperado",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_desperado.png"
+  },
+  {
+    "name": "Praticité",
+    "skill": "commander_practical",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_practical.png"
+  },
+  {
+    "name": "Précision",
+    "skill": "gunner_smoothTurret",
+    "aliases": [
+      "rotation souple"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_smoothTurret.png"
+  },
+  {
+    "name": "Rancunier",
+    "skill": "gunner_rancorous",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_rancorous.png"
+  },
+  {
+    "name": "Rester alerte",
+    "skill": "commander_staySharp",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_staySharp.png"
+  },
+  {
+    "name": "Râtelier sécurisé",
+    "skill": "loader_pedant",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_pedant.png"
+  },
+  {
+    "name": "Réglage des munitions",
+    "skill": "loader_ammunitionImprove",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_ammunitionImprove.png"
+  },
+  {
+    "name": "Réparations",
+    "skill": "repair",
+    "aliases": [
+      "reparation",
+      "réparation",
+      "reparations"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/repair.png"
+  },
+  {
+    "name": "Seconde chance",
+    "skill": "loader_secondChance",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/loader_secondChance.png"
+  },
+  {
+    "name": "Sixième sens",
+    "skill": "commander_sixthSense",
+    "aliases": [
+      "6e sens",
+      "sixieme sens",
+      "sixième sens",
+      "6ème sens"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_sixthSense.png"
+  },
+  {
+    "name": "Soutien sur le terrain",
+    "skill": "driver_suspensionRepair",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/driver_suspensionRepair.png"
+  },
+  {
+    "name": "Tenir le coup",
+    "skill": "commander_holdLine",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_holdLine.png"
+  },
+  {
+    "name": "Urgence",
+    "skill": "commander_emergency",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_emergency.png"
+  },
+  {
+    "name": "Visée rapide",
+    "skill": "gunner_quickAiming",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_quickAiming.png"
+  },
+  {
+    "name": "fireFighting",
+    "skill": "fireFighting",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/fireFighting.png"
+  },
+  {
+    "name": "À bout portant",
+    "skill": "gunner_pointBlast",
+    "aliases": [],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/gunner_pointBlast.png"
+  },
+  {
+    "name": "Œil de lynx",
+    "skill": "commander_eagleEye",
+    "aliases": [
+      "oeil de lynx",
+      "eagle eye"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/commander_eagleEye.png"
+  }
+]

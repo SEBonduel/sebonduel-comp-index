@@ -198,6 +198,9 @@
   .tabpanel.on { display: block; }
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
+  .crewrole { margin-bottom: 14px; }
+  .crolehdr { font-family: "Orbitron", sans-serif; font-size: 11px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--cyan); margin-bottom: 7px; }
   .setup-label { font-family: "Orbitron", sans-serif; font-size: 12px; color: var(--gold); font-weight: 700;
     letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 8px; }
   .slots { display: flex; flex-wrap: wrap; gap: 9px; }
@@ -283,7 +286,7 @@
 "use strict";
 (function () {
   const el = (id) => document.getElementById(id);
-  const state = { tanks: [], builds: {}, equipment: [], nations: [], types: [], q: "", onlyBuilds: false };
+  const state = { tanks: [], builds: {}, equipment: [], crewskills: [], nations: [], types: [], q: "", onlyBuilds: false };
 
   const TYPE_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
   const TYPE_FR = { heavyTank: "Lourd", mediumTank: "Moyen", lightTank: "Léger",
@@ -434,6 +437,34 @@
         (ic ? `<img class="eqic" src="${ic}" alt="">` : "") + s + `</div>`;
     }).join("") + `</div>`;
   }
+  // Résout l'icône d'une compétence d'équipage (nom ou alias).
+  function crewIcon(text) {
+    const t = norm(text);
+    let best = null, len = 0;
+    for (const c of state.crewskills) {
+      for (const a of [c.name, ...(c.aliases || [])]) {
+        const na = norm(a);
+        if (na && (t.includes(na) || na.includes(t)) && na.length > len) { best = c.icon; len = na.length; }
+      }
+    }
+    return best;
+  }
+  function crewSlots(arr) {
+    return `<div class="slots">` + arr.map((s, i) => {
+      const ic = crewIcon(s);
+      return `<div class="slot num eq" data-n="${i + 1}">` +
+        (ic ? `<img class="eqic" src="${ic}" alt="">` : "") + s + `</div>`;
+    }).join("") + `</div>`;
+  }
+  // crew : liste plate OU par membre [{role, skills[]}] (façon garage/skill4ltu).
+  function crewRender(crew) {
+    if (!crew || !crew.length) return "";
+    if (typeof crew[0] === "object")
+      return crew.map((r) =>
+        `<div class="crewrole"><div class="crolehdr">${r.role || ""}</div>${crewSlots(r.skills || [])}</div>`
+      ).join("");
+    return crewSlots(crew);
+  }
   function chips(arr) {
     return `<div class="chips">` + arr.map((s) => `<span class="chip">${s}</span>`).join("") + `</div>`;
   }
@@ -488,7 +519,7 @@
     else if (b.fieldMods?.length)
       tabs.push({ k: "fm", label: "Amélioration de terrain", html: chips(b.fieldMods) });
     if (b.crew?.length)
-      tabs.push({ k: "crew", label: "Équipage", html: slots(b.crew) });
+      tabs.push({ k: "crew", label: "Équipage", html: crewRender(b.crew) });
     if (b.note)
       tabs.push({ k: "note", label: "Note", html: `<div class="note">${b.note}</div>` });
 
@@ -528,11 +559,13 @@
     fetch("data/tanks.json").then((r) => r.json()),
     fetch("data/builds.json").then((r) => r.json()).catch(() => ({})),
     fetch("data/equipment.json").then((r) => r.json()).catch(() => ([])),
-  ]).then(([tanks, builds, equipment]) => {
+    fetch("data/crewskills.json").then((r) => r.json()).catch(() => ([])),
+  ]).then(([tanks, builds, equipment, crewskills]) => {
     state.tanks = tanks;
     delete builds._schema;
     state.builds = builds;
     state.equipment = equipment;
+    state.crewskills = crewskills;
     buildFilters();
     render();
   });

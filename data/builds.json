@@ -3,28 +3,149 @@
     "note": "Build compétitif par char, clé = slug (voir tanks.json). Rempli au fur et à mesure. equipment = 1 ou 2 compos {label, slots[3]}.",
     "exemple": {
       "equipment": [
-        { "label": "Standard", "slots": ["Slot 1", "Slot 2", "Slot 3"] },
-        { "label": "Alternatif", "slots": ["Slot 1", "Slot 2", "Slot 3"] }
+        {
+          "label": "Standard",
+          "slots": [
+            "Slot 1",
+            "Slot 2",
+            "Slot 3"
+          ]
+        },
+        {
+          "label": "Alternatif",
+          "slots": [
+            "Slot 1",
+            "Slot 2",
+            "Slot 3"
+          ]
+        }
       ],
-      "fieldMods": ["Directive 1", "Directive 2"],
-      "crew": ["Compétence 1", "Compétence 2", "..."],
-      "consumables": ["Conso 1", "Conso 2", "Conso 3"],
+      "fieldMods": [
+        "Directive 1",
+        "Directive 2"
+      ],
+      "crew": [
+        "Compétence 1",
+        "Compétence 2",
+        "..."
+      ],
+      "consumables": [
+        "Conso 1",
+        "Conso 2",
+        "Conso 3"
+      ],
       "ammo": "25 AP · 5 HE",
       "note": "Rôle et stratégie en compétitif."
     }
   },
   "is-7": {
     "equipment": [
-      { "label": "Assaut", "slots": ["Stabilisateur vertical", "Fouloir de canon", "Turbocompresseur"] },
-      { "label": "Mobilité", "slots": ["Stabilisateur vertical", "Crampons de chenilles", "Turbocompresseur"] }
+      {
+        "label": "Assaut",
+        "slots": [
+          "Stabilisateur vertical",
+          "Fouloir de canon",
+          "Turbocompresseur"
+        ]
+      },
+      {
+        "label": "Mobilité",
+        "slots": [
+          "Stabilisateur vertical",
+          "Crampons de chenilles",
+          "Turbocompresseur"
+        ]
+      }
     ],
     "role": "Lourd de percée",
     "fieldModsTree": [
-      { "level": "II", "left": "Suspension tout-terrain", "right": "Suspension allégée", "pick": "right" },
-      { "level": "IV", "left": "Ajustement de parallaxe", "right": "Rodage des engrenages de visée", "pick": "left" },
-      { "level": "V", "left": "Isolation phonique", "right": "Entraînement électrique du périscope", "pick": "right" },
-      { "level": "VII", "left": "Recâblage de l'alimentation (Config 1)", "right": "Recâblage de l'alimentation (Config 2)", "pick": "left" },
-      { "level": "VIII", "left": "Plateforme renforcée", "right": "Plateforme allégée", "pick": "right" }
+      {
+        "level": "II",
+        "left": "Suspension tout-terrain",
+        "right": "Suspension allégée",
+        "pick": "right"
+      },
+      {
+        "level": "IV",
+        "left": "Ajustement de parallaxe",
+        "right": "Rodage des engrenages de visée",
+        "pick": "left"
+      },
+      {
+        "level": "V",
+        "left": "Isolation phonique",
+        "right": "Entraînement électrique du périscope",
+        "pick": "right"
+      },
+      {
+        "level": "VII",
+        "left": "Recâblage de l'alimentation (Config 1)",
+        "right": "Recâblage de l'alimentation (Config 2)",
+        "pick": "left"
+      },
+      {
+        "level": "VIII",
+        "left": "Plateforme renforcée",
+        "right": "Plateforme allégée",
+        "pick": "right"
+      }
+    ],
+    "crew": [
+      {
+        "role": "Commandant",
+        "skills": [
+          "Réparations",
+          "Frères d'armes",
+          "Sixième sens",
+          "Dissimulation",
+          "Œil de lynx",
+          "Praticité"
+        ]
+      },
+      {
+        "role": "Tireur",
+        "skills": [
+          "Réparations",
+          "Frères d'armes",
+          "Visée rapide",
+          "Précision",
+          "Coordination",
+          "Armurier"
+        ]
+      },
+      {
+        "role": "Pilote",
+        "skills": [
+          "Réparations",
+          "Frères d'armes",
+          "Conduite souple",
+          "Pilote tout-terrain",
+          "As du volant",
+          "Bélier"
+        ]
+      },
+      {
+        "role": "Chargeur 1",
+        "skills": [
+          "Réparations",
+          "Frères d'armes",
+          "Râtelier sécurisé",
+          "Intuition",
+          "Poussée d'adrénaline",
+          "Urgence"
+        ]
+      },
+      {
+        "role": "Chargeur 2",
+        "skills": [
+          "Réparations",
+          "Frères d'armes",
+          "Râtelier sécurisé",
+          "Intuition",
+          "Poussée d'adrénaline",
+          "Urgence"
+        ]
+      }
     ]
   }
 }
