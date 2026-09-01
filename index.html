@@ -101,6 +101,15 @@
   .section { margin-top: 16px; }
   .section h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
     color: var(--muted); margin: 0 0 8px; display: flex; align-items: center; gap: 6px; }
+  /* Arbre des directives de terrain */
+  .fmtree { display: flex; flex-direction: column; gap: 6px; }
+  .fmrow { display: grid; grid-template-columns: 1fr 22px 1fr; gap: 6px; align-items: stretch; }
+  .fmopt { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+    padding: 7px 10px; font-size: 13px; color: var(--muted); display: flex; align-items: center; }
+  .fmopt.pick { border-color: var(--accent); background: rgba(241,196,15,.14);
+    color: var(--txt); font-weight: 600; }
+  .fmopt.pick::after { content: "★"; margin-left: auto; color: var(--accent); font-size: 12px; }
+  .fmvs { align-self: center; text-align: center; color: var(--muted); font-size: 11px; }
   .setup-label { font-size: 12px; color: var(--accent); font-weight: 600; margin: 10px 0 5px; }
   .setup-label:first-child { margin-top: 0; }
   .slots { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -175,8 +184,8 @@
   }
   const hasBuild = (slug) => {
     const b = state.builds[slug];
-    return !!(b && (equipSetups(b.equipment).length || b.note ||
-      b.crew?.length || b.consumables?.length || b.fieldMods?.length || b.ammo));
+    return !!(b && (equipSetups(b.equipment).length || b.note || b.crew?.length ||
+      b.consumables?.length || b.fieldMods?.length || b.fieldModsTree?.length || b.ammo));
   };
 
   function buildFilters() {
@@ -263,6 +272,14 @@
   function chips(arr) {
     return `<div class="chips">` + arr.map((s) => `<span class="chip">${s}</span>`).join("") + `</div>`;
   }
+  // Arbre des directives : chaque ligne = 2 options, le côté "pick" est surligné.
+  function fmTree(rows) {
+    return `<div class="fmtree">` + rows.map((r) => {
+      const L = `<div class="fmopt ${r.pick === "left" ? "pick" : ""}">${r.left || ""}</div>`;
+      const R = `<div class="fmopt ${r.pick === "right" ? "pick" : ""}">${r.right || ""}</div>`;
+      return `<div class="fmrow">${L}<div class="fmvs">/</div>${R}</div>`;
+    }).join("") + `</div>`;
+  }
 
   function openModal(t) {
     const b = state.builds[t.slug] || {};
@@ -278,8 +295,8 @@
       `<div class="body">`;
 
     const setups = equipSetups(b.equipment);
-    const any = setups.length || b.fieldMods?.length || b.crew?.length ||
-      b.consumables?.length || b.ammo || b.note;
+    const any = setups.length || b.fieldMods?.length || b.fieldModsTree?.length ||
+      b.crew?.length || b.consumables?.length || b.ammo || b.note;
     if (!any) {
       html += `<div class="todo">🔧 Build compétitif à venir pour ce char.</div>`;
     } else {
@@ -290,7 +307,9 @@
           equipSlots(s.slots)).join("");
         html += `<div class="section"><h3>🔧 Équipements${multi ? " (2 compos)" : ""}</h3>${blocks}</div>`;
       }
-      if (b.fieldMods?.length)
+      if (b.fieldModsTree?.length)
+        html += `<div class="section"><h3>🛠️ Directives de terrain <span style="color:var(--muted);text-transform:none;letter-spacing:0">(★ = à privilégier)</span></h3>${fmTree(b.fieldModsTree)}</div>`;
+      else if (b.fieldMods?.length)
         html += `<div class="section"><h3>🛠️ Directives de terrain</h3>${chips(b.fieldMods)}</div>`;
       if (b.crew?.length)
         html += `<div class="section"><h3>🎖️ Compétences équipage (ordre)</h3>${slots(b.crew)}</div>`;
