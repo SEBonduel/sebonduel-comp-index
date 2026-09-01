@@ -19,21 +19,38 @@
     margin: 0; color: var(--txt); min-height: 100vh; overflow-x: hidden;
     font-family: "Rajdhani", system-ui, sans-serif; font-size: 16px; font-weight: 500;
     background:
-      radial-gradient(1100px 620px at 50% -12%, rgba(51,230,255,.10), transparent 60%),
-      radial-gradient(900px 600px at 88% 8%, rgba(255,207,63,.08), transparent 55%),
-      radial-gradient(1000px 700px at 10% 100%, rgba(155,123,255,.08), transparent 55%),
+      radial-gradient(1100px 620px at 50% -12%, rgba(51,230,255,.12), transparent 60%),
+      radial-gradient(900px 600px at 88% 6%, rgba(255,207,63,.10), transparent 55%),
+      radial-gradient(1000px 700px at 8% 100%, rgba(155,123,255,.10), transparent 55%),
       var(--bg);
   }
-  /* grille tech animée en fond */
+  /* Couche 1 : grille tech + points, animée */
   body::before {
-    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    content: ""; position: fixed; inset: -20%; z-index: -2; pointer-events: none;
     background-image:
-      linear-gradient(rgba(120,170,255,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(120,170,255,.05) 1px, transparent 1px);
-    background-size: 46px 46px; mask-image: radial-gradient(circle at 50% 30%, #000 30%, transparent 85%);
-    animation: drift 40s linear infinite;
+      linear-gradient(rgba(120,170,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,170,255,.06) 1px, transparent 1px),
+      radial-gradient(rgba(120,170,255,.10) 1px, transparent 1.5px);
+    background-size: 48px 48px, 48px 48px, 48px 48px;
+    background-position: 0 0, 0 0, 24px 24px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, #000 55%, transparent 92%);
+    animation: drift 50s linear infinite;
   }
-  @keyframes drift { from { background-position: 0 0, 0 0; } to { background-position: 46px 92px, 92px 46px; } }
+  @keyframes drift { from { background-position: 0 0, 0 0, 24px 24px; }
+                     to { background-position: 48px 96px, 96px 48px, 72px 120px; } }
+  /* Couche 2 : orbes lumineux qui dérivent lentement */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden;
+    background:
+      radial-gradient(420px 420px at 18% 30%, rgba(51,230,255,.10), transparent 70%),
+      radial-gradient(360px 360px at 82% 68%, rgba(255,207,63,.09), transparent 70%),
+      radial-gradient(300px 300px at 60% 12%, rgba(155,123,255,.09), transparent 70%);
+    animation: float 26s ease-in-out infinite alternate;
+  }
+  @keyframes float {
+    from { transform: translate3d(0,0,0) scale(1); }
+    to { transform: translate3d(-3%, 4%, 0) scale(1.08); }
+  }
   a { color: var(--gold); text-decoration: none; }
 
   header { padding: 34px 20px 8px; text-align: center; position: relative; }
@@ -158,9 +175,9 @@
     letter-spacing: .5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     text-shadow: 0 2px 8px rgba(0,0,0,.95); }
   .card .badges { display: flex; gap: 5px; justify-content: center; margin-top: 6px; flex-wrap: wrap; }
-  .badge { font-size: 10px; padding: 3px 9px; border-radius: 6px; background: rgba(40,52,80,.7);
-    color: #b9c6ee; border: 1px solid var(--line); font-weight: 700; letter-spacing: .5px;
-    text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px; }
+  .badge { font-size: 10px; padding: 0 9px; height: 22px; line-height: 1; border-radius: 6px;
+    background: rgba(40,52,80,.7); color: #b9c6ee; border: 1px solid var(--line); font-weight: 700;
+    letter-spacing: .5px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px; }
   .badge.prem { color: var(--gold); border-color: rgba(255,207,63,.4); background: rgba(60,48,10,.6);
     box-shadow: 0 0 10px rgba(255,207,63,.25); }
   .card .dot { position: absolute; top: 10px; right: 10px; width: 9px; height: 9px; border-radius: 50%;
@@ -188,7 +205,7 @@
   .modal .top .h { flex: 1; }
   .modal .top h2 { margin: 0; font-family: "Orbitron", sans-serif; font-weight: 900; font-size: 22px;
     letter-spacing: 1px; }
-  .modal .top .badges { margin-top: 7px; }
+  .modal .top .badges { margin-top: 7px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .modal .close { background: none; border: 1px solid var(--line); border-radius: 6px; color: var(--muted);
     font-size: 20px; cursor: pointer; line-height: 1; width: 34px; height: 34px; transition: .14s; }
   .modal .close:hover { color: var(--red); border-color: var(--red); box-shadow: 0 0 14px rgba(255,93,108,.3); }
@@ -275,9 +292,9 @@
   <input type="text" id="search" class="search" placeholder="Rechercher un char par nom…" autocomplete="off">
   <div class="filters">
     <div class="seg" id="listSeg">
-      <button class="segbtn on" data-m="meta">★ Chars meta</button>
+      <button class="segbtn on" data-m="all">Tous</button>
+      <button class="segbtn" data-m="meta">★ Chars meta</button>
       <button class="segbtn" data-m="situ">Situationnels</button>
-      <button class="segbtn" data-m="all">Tous</button>
     </div>
     <div class="sep"></div>
     <div class="dropdown" id="ddNation">
@@ -307,7 +324,7 @@
 (function () {
   const el = (id) => document.getElementById(id);
   const state = { tanks: [], builds: {}, equipment: [], crewskills: [], meta: new Set(),
-                  listMode: "meta", nations: [], types: [], q: "", onlyBuilds: false };
+                  listMode: "all", nations: [], types: [], q: "", onlyBuilds: false };
 
   const TYPE_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
   const TYPE_FR = { heavyTank: "Lourd", mediumTank: "Moyen", lightTank: "Léger",
