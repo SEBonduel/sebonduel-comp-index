@@ -101,15 +101,32 @@
   .section { margin-top: 16px; }
   .section h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
     color: var(--muted); margin: 0 0 8px; display: flex; align-items: center; gap: 6px; }
-  /* Arbre des directives de terrain */
-  .fmtree { display: flex; flex-direction: column; gap: 6px; }
-  .fmrow { display: grid; grid-template-columns: 1fr 22px 1fr; gap: 6px; align-items: stretch; }
-  .fmopt { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
-    padding: 7px 10px; font-size: 13px; color: var(--muted); display: flex; align-items: center; }
-  .fmopt.pick { border-color: var(--accent); background: rgba(241,196,15,.14);
+  /* Onglets de la modale */
+  .role { color: var(--accent2); font-size: 12px; margin-top: 5px; font-weight: 600; }
+  .tabbar { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line);
+    padding-bottom: 12px; margin-bottom: 14px; }
+  .tab { background: var(--panel2); border: 1px solid var(--line); color: var(--muted);
+    border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .tab:hover { color: var(--txt); border-color: var(--accent); }
+  .tab.on { background: var(--accent); color: #17140a; border-color: var(--accent); }
+  .tabpanel { display: none; }
+  .tabpanel.on { display: block; }
+
+  /* Arbre des directives (cartes façon skill4ltu) */
+  .fmtree { display: flex; flex-direction: column; gap: 14px; }
+  .fmrow2 { display: grid; grid-template-columns: 32px 1fr; gap: 10px; align-items: center; }
+  .fmlvl { width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+    color: #17140a; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .fmlvl.empty { background: transparent; }
+  .fmopts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fmcard { position: relative; background: var(--panel2); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 10px; text-align: center; font-size: 13px;
+    color: var(--muted); min-height: 50px; display: flex; align-items: center; justify-content: center; }
+  .fmcard.picked { border-color: var(--accent); background: rgba(241,196,15,.12);
     color: var(--txt); font-weight: 600; }
-  .fmopt.pick::after { content: "★"; margin-left: auto; color: var(--accent); font-size: 12px; }
-  .fmvs { align-self: center; text-align: center; color: var(--muted); font-size: 11px; }
+  .fmcard .chk { position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #17140a; width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-style: normal; }
   .setup-label { font-size: 12px; color: var(--accent); font-weight: 600; margin: 10px 0 5px; }
   .setup-label:first-child { margin-top: 0; }
   .slots { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -274,56 +291,80 @@
   }
   // Arbre des directives : chaque ligne = 2 options, le côté "pick" est surligné.
   function fmTree(rows) {
-    return `<div class="fmtree">` + rows.map((r) => {
-      const L = `<div class="fmopt ${r.pick === "left" ? "pick" : ""}">${r.left || ""}</div>`;
-      const R = `<div class="fmopt ${r.pick === "right" ? "pick" : ""}">${r.right || ""}</div>`;
-      return `<div class="fmrow">${L}<div class="fmvs">/</div>${R}</div>`;
-    }).join("") + `</div>`;
+    const opt = (r, side) => {
+      const picked = r.pick === side;
+      const label = side === "left" ? r.left : r.right;
+      return `<div class="fmcard ${picked ? "picked" : ""}"><span>${label || ""}</span>` +
+        (picked ? `<i class="chk">✓</i>` : "") + `</div>`;
+    };
+    return `<div class="fmtree">` + rows.map((r) =>
+      `<div class="fmrow2">` +
+      `<div class="fmlvl ${r.level ? "" : "empty"}">${r.level || ""}</div>` +
+      `<div class="fmopts">${opt(r, "left")}${opt(r, "right")}</div></div>`
+    ).join("") + `</div>`;
   }
 
   function openModal(t) {
     const b = state.builds[t.slug] || {};
     const armor = `https://tanks.gg/tank/${t.slug}/model`;
-    let html =
+
+    const head =
       `<div class="top">` +
       `<img src="${t.icon}" alt="${t.name}">` +
       `<div class="h"><h2>${t.name}</h2>` +
       `<div class="badges"><span class="badge">${t.nation_fr}</span>` +
       `<span class="badge">${t.type_fr}</span>` +
-      (t.premium ? `<span class="badge prem">Premium</span>` : "") + `</div></div>` +
-      `<button class="close" title="Fermer">×</button></div>` +
-      `<div class="body">`;
+      (t.premium ? `<span class="badge prem">Premium</span>` : "") + `</div>` +
+      (b.role ? `<div class="role">▲ ${b.role}</div>` : "") +
+      `</div><button class="close" title="Fermer">×</button></div>`;
 
+    // Onglets : uniquement ceux qui ont du contenu.
+    const tabs = [];
     const setups = equipSetups(b.equipment);
-    const any = setups.length || b.fieldMods?.length || b.fieldModsTree?.length ||
-      b.crew?.length || b.consumables?.length || b.ammo || b.note;
-    if (!any) {
-      html += `<div class="todo">🔧 Build compétitif à venir pour ce char.</div>`;
-    } else {
-      if (setups.length) {
-        const multi = setups.length > 1;
-        const blocks = setups.map((s) =>
+    if (setups.length || b.consumables?.length || b.ammo) {
+      const multi = setups.length > 1;
+      let c = "";
+      if (setups.length)
+        c += setups.map((s) =>
           (multi || s.label ? `<div class="setup-label">${s.label || "Compo"}</div>` : "") +
           equipSlots(s.slots)).join("");
-        html += `<div class="section"><h3>🔧 Équipements${multi ? " (2 compos)" : ""}</h3>${blocks}</div>`;
-      }
-      if (b.fieldModsTree?.length)
-        html += `<div class="section"><h3>🛠️ Directives de terrain <span style="color:var(--muted);text-transform:none;letter-spacing:0">(★ = à privilégier)</span></h3>${fmTree(b.fieldModsTree)}</div>`;
-      else if (b.fieldMods?.length)
-        html += `<div class="section"><h3>🛠️ Directives de terrain</h3>${chips(b.fieldMods)}</div>`;
-      if (b.crew?.length)
-        html += `<div class="section"><h3>🎖️ Compétences équipage (ordre)</h3>${slots(b.crew)}</div>`;
       if (b.consumables?.length)
-        html += `<div class="section"><h3>🧰 Consommables</h3>${chips(b.consumables)}</div>`;
+        c += `<div class="section"><h3>🧰 Consommables</h3>${chips(b.consumables)}</div>`;
       if (b.ammo)
-        html += `<div class="section"><h3>💥 Obus</h3><div class="ammo">${b.ammo}</div></div>`;
-      if (b.note)
-        html += `<div class="section"><h3>📝 Note</h3><div class="note">${b.note}</div></div>`;
+        c += `<div class="section"><h3>💥 Obus</h3><div class="ammo">${b.ammo}</div></div>`;
+      tabs.push({ k: "equip", label: "🔧 Équipements", html: c });
     }
-    html += `<a class="armor" href="${armor}" target="_blank" rel="noopener">🛡️ Voir le blindage 3D sur tanks.gg ↗</a>`;
-    html += `</div>`;
+    if (b.fieldModsTree?.length)
+      tabs.push({ k: "fm", label: "🛠️ Directives", html: fmTree(b.fieldModsTree) });
+    else if (b.fieldMods?.length)
+      tabs.push({ k: "fm", label: "🛠️ Directives", html: chips(b.fieldMods) });
+    if (b.crew?.length)
+      tabs.push({ k: "crew", label: "🎖️ Équipage", html: slots(b.crew) });
+    if (b.note)
+      tabs.push({ k: "note", label: "📝 Note", html: `<div class="note">${b.note}</div>` });
+
+    let body;
+    if (!tabs.length) {
+      body = `<div class="todo">🔧 Build compétitif à venir pour ce char.</div>`;
+    } else {
+      const bar = tabs.map((tb, i) =>
+        `<button class="tab ${i === 0 ? "on" : ""}" data-k="${tb.k}">${tb.label}</button>`).join("");
+      const panels = tabs.map((tb, i) =>
+        `<div class="tabpanel ${i === 0 ? "on" : ""}" data-k="${tb.k}">${tb.html}</div>`).join("");
+      body = `<div class="tabbar">${bar}</div><div class="tabpanels">${panels}</div>`;
+    }
+
+    const html = head + `<div class="body">` + body +
+      `<a class="armor" href="${armor}" target="_blank" rel="noopener">🛡️ Voir le blindage 3D sur tanks.gg ↗</a></div>`;
 
     el("modal").innerHTML = html;
+    el("modal").querySelectorAll(".tab").forEach((btn) => {
+      btn.onclick = () => {
+        el("modal").querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x === btn));
+        el("modal").querySelectorAll(".tabpanel").forEach((p) =>
+          p.classList.toggle("on", p.dataset.k === btn.dataset.k));
+      };
+    });
     el("modal").querySelector(".close").onclick = closeModal;
     el("backdrop").classList.add("open");
   }
