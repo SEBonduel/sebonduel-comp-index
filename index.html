@@ -79,6 +79,33 @@
   .count { color: var(--cyan); font-size: 12px; margin-left: auto; font-weight: 700;
     letter-spacing: 1px; text-transform: uppercase; font-family: "Orbitron", sans-serif; }
 
+  /* Sélecteurs multi-choix */
+  .dropdown { position: relative; }
+  .ddbtn { background: var(--panel2); border: 1px solid var(--line); color: var(--txt);
+    border-radius: 8px; padding: 7px 13px; font-family: "Rajdhani", sans-serif; font-size: 13px;
+    font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: .6px;
+    display: inline-flex; align-items: center; gap: 7px; transition: .14s; }
+  .ddbtn:hover { border-color: var(--cyan); box-shadow: 0 0 12px rgba(51,230,255,.2); }
+  .ddbtn.ghost { color: var(--muted); }
+  .ddbtn .ddcount { color: var(--gold); font-family: "Orbitron", sans-serif; font-size: 11px; }
+  .ddbtn .caret { font-style: normal; color: var(--muted); font-size: 11px; }
+  .dropdown.open .ddbtn { border-color: var(--cyan); color: var(--cyan); }
+  .dropdown.open .caret { transform: rotate(180deg); }
+  .ddpanel { position: absolute; top: calc(100% + 6px); left: 0; z-index: 20; min-width: 200px;
+    background: var(--panel); backdrop-filter: blur(12px); border: 1px solid var(--line);
+    border-radius: 10px; padding: 6px; display: none; max-height: 340px; overflow-y: auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,.6), 0 0 20px rgba(51,230,255,.12); }
+  .dropdown.open .ddpanel { display: block; }
+  .ddopt { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 7px;
+    cursor: pointer; font-size: 14px; font-weight: 600; user-select: none; transition: .12s; }
+  .ddopt:hover { background: var(--panel2); }
+  .ddopt input { appearance: none; width: 16px; height: 16px; border: 1px solid var(--line);
+    border-radius: 4px; cursor: pointer; position: relative; flex: none; }
+  .ddopt input:checked { background: var(--gold); border-color: var(--gold); }
+  .ddopt input:checked::after { content: "✓"; position: absolute; inset: 0; color: #17140a;
+    font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+  .ddopt .flag { font-size: 16px; }
+
   .grid { max-width: 1240px; margin: 22px auto 70px; padding: 0 16px;
     display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 14px; }
   .card {
@@ -227,11 +254,16 @@
 <div class="toolbar">
   <input type="text" id="search" class="search" placeholder="Rechercher un char par nom…" autocomplete="off">
   <div class="filters">
-    <div class="grp" id="nationFilters"></div>
-    <div class="sep"></div>
-    <div class="grp" id="typeFilters"></div>
-    <div class="sep"></div>
+    <div class="dropdown" id="ddNation">
+      <button class="ddbtn" id="ddNationBtn">🌐 <span>Nations</span> <b class="ddcount"></b><i class="caret">▾</i></button>
+      <div class="ddpanel" id="ddNationPanel"></div>
+    </div>
+    <div class="dropdown" id="ddType">
+      <button class="ddbtn" id="ddTypeBtn">⚙ <span>Types</span> <b class="ddcount"></b><i class="caret">▾</i></button>
+      <div class="ddpanel" id="ddTypePanel"></div>
+    </div>
     <div class="pill" id="onlyBuilds">✓ Avec build</div>
+    <button class="ddbtn ghost" id="resetFilters">Réinitialiser</button>
     <div class="count" id="count"></div>
   </div>
 </div>
@@ -248,11 +280,15 @@
 "use strict";
 (function () {
   const el = (id) => document.getElementById(id);
-  const state = { tanks: [], builds: {}, equipment: [], nation: "", type: "", q: "", onlyBuilds: false };
+  const state = { tanks: [], builds: {}, equipment: [], nations: [], types: [], q: "", onlyBuilds: false };
 
   const TYPE_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
   const TYPE_FR = { heavyTank: "Lourd", mediumTank: "Moyen", lightTank: "Léger",
                     "AT-SPG": "Chasseur", SPG: "Arty" };
+  // Noms complets pour le sélecteur (les cartes gardent la version courte nation_fr).
+  const NATION_FULL = { ussr: "U.R.S.S.", germany: "Allemagne", usa: "États-Unis",
+    france: "France", uk: "Royaume-Uni", china: "Chine", japan: "Japon",
+    czech: "Tchécoslovaquie", poland: "Pologne", sweden: "Suède", italy: "Italie" };
   const TYPE_ICON = { heavyTank: "🛡", mediumTank: "⚔", lightTank: "⚡",
                       "AT-SPG": "🎯", SPG: "💥" };
   const FLAG = { ussr: "🇷🇺", germany: "🇩🇪", usa: "🇺🇸", france: "🇫🇷", uk: "🇬🇧",
@@ -276,34 +312,61 @@
       b.consumables?.length || b.fieldMods?.length || b.fieldModsTree?.length || b.ammo));
   };
 
-  function buildFilters() {
-    const nations = [...new Set(state.tanks.map((t) => t.nation))]
-      .sort((a, b) => state.tanks.find((t) => t.nation === a).nation_fr
-        .localeCompare(state.tanks.find((t) => t.nation === b).nation_fr));
-    const nf = el("nationFilters");
-    nations.forEach((n) => {
-      const fr = state.tanks.find((t) => t.nation === n).nation_fr;
-      const p = document.createElement("div");
-      p.className = "pill"; p.textContent = fr;
-      p.onclick = () => { state.nation = state.nation === n ? "" : n; sync(); };
-      p.dataset.nation = n;
-      nf.appendChild(p);
-    });
-    const tf = el("typeFilters");
-    TYPE_ORDER.filter((ty) => state.tanks.some((t) => t.type === ty)).forEach((ty) => {
-      const p = document.createElement("div");
-      p.className = "pill"; p.textContent = TYPE_FR[ty];
-      p.onclick = () => { state.type = state.type === ty ? "" : ty; sync(); };
-      p.dataset.type = ty;
-      tf.appendChild(p);
+  // Construit un menu déroulant multi-choix (cases à cocher) dans `panel`.
+  function fillDropdown(panel, options, arr) {
+    panel.innerHTML = "";
+    options.forEach((o) => {
+      const lab = document.createElement("label");
+      lab.className = "ddopt";
+      lab.innerHTML = `<input type="checkbox"><span class="flag">${o.flag || ""}</span>${o.label}`;
+      const cb = lab.querySelector("input");
+      cb.checked = arr.includes(o.value);
+      cb.onchange = () => {
+        const i = arr.indexOf(o.value);
+        if (cb.checked && i < 0) arr.push(o.value);
+        else if (!cb.checked && i >= 0) arr.splice(i, 1);
+        sync();
+      };
+      panel.appendChild(lab);
     });
   }
 
+  function buildFilters() {
+    const nations = [...new Set(state.tanks.map((t) => t.nation))]
+      .sort((a, b) => (NATION_FULL[a] || a).localeCompare(NATION_FULL[b] || b));
+    fillDropdown(el("ddNationPanel"),
+      nations.map((n) => ({ value: n, label: NATION_FULL[n] || n, flag: FLAG[n] || "" })),
+      state.nations);
+    const types = TYPE_ORDER.filter((ty) => state.tanks.some((t) => t.type === ty));
+    fillDropdown(el("ddTypePanel"),
+      types.map((ty) => ({ value: ty, label: TYPE_FR[ty], flag: TYPE_ICON[ty] || "" })),
+      state.types);
+
+    // Ouverture/fermeture des menus.
+    [["ddNationBtn", "ddNation"], ["ddTypeBtn", "ddType"]].forEach(([btn, dd]) => {
+      el(btn).onclick = (e) => {
+        e.stopPropagation();
+        const open = el(dd).classList.contains("open");
+        document.querySelectorAll(".dropdown").forEach((d) => d.classList.remove("open"));
+        el(dd).classList.toggle("open", !open);
+      };
+    });
+    document.addEventListener("click", () =>
+      document.querySelectorAll(".dropdown").forEach((d) => d.classList.remove("open")));
+    el("ddNationPanel").onclick = (e) => e.stopPropagation();
+    el("ddTypePanel").onclick = (e) => e.stopPropagation();
+    el("resetFilters").onclick = () => {
+      state.nations = []; state.types = []; state.onlyBuilds = false;
+      document.querySelectorAll(".ddpanel input").forEach((cb) => { cb.checked = false; });
+      sync();
+    };
+  }
+
   function sync() {
-    document.querySelectorAll("#nationFilters .pill").forEach((p) =>
-      p.classList.toggle("on", p.dataset.nation === state.nation));
-    document.querySelectorAll("#typeFilters .pill").forEach((p) =>
-      p.classList.toggle("on", p.dataset.type === state.type));
+    const nc = el("ddNation").querySelector(".ddcount");
+    const tc = el("ddType").querySelector(".ddcount");
+    nc.textContent = state.nations.length ? `(${state.nations.length})` : "";
+    tc.textContent = state.types.length ? `(${state.types.length})` : "";
     el("onlyBuilds").classList.toggle("on", state.onlyBuilds);
     render();
   }
@@ -311,8 +374,8 @@
   function render() {
     const q = norm(state.q);
     const list = state.tanks.filter((t) =>
-      (!state.nation || t.nation === state.nation) &&
-      (!state.type || t.type === state.type) &&
+      (!state.nations.length || state.nations.includes(t.nation)) &&
+      (!state.types.length || state.types.includes(t.type)) &&
       (!state.onlyBuilds || hasBuild(t.slug)) &&
       (!q || norm(t.name).includes(q)));
     const g = el("grid");
