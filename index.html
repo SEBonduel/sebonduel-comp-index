@@ -105,6 +105,9 @@
   .ddopt input:checked::after { content: "✓"; position: absolute; inset: 0; color: #17140a;
     font-size: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; }
   .ddopt .flag { font-size: 16px; }
+  .tsvg { width: 14px; height: 14px; fill: currentColor; vertical-align: -2px; flex: none; }
+  .ddopt .tsvg { width: 16px; height: 16px; color: var(--cyan); }
+  .badge .tsvg { width: 12px; height: 12px; }
 
   .grid { max-width: 1240px; margin: 22px auto 70px; padding: 0 16px;
     display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 14px; }
@@ -255,11 +258,11 @@
   <input type="text" id="search" class="search" placeholder="Rechercher un char par nom…" autocomplete="off">
   <div class="filters">
     <div class="dropdown" id="ddNation">
-      <button class="ddbtn" id="ddNationBtn">🌐 <span>Nations</span> <b class="ddcount"></b><i class="caret">▾</i></button>
+      <button class="ddbtn" id="ddNationBtn"><span>Nations</span> <b class="ddcount"></b><i class="caret">▾</i></button>
       <div class="ddpanel" id="ddNationPanel"></div>
     </div>
     <div class="dropdown" id="ddType">
-      <button class="ddbtn" id="ddTypeBtn">⚙ <span>Types</span> <b class="ddcount"></b><i class="caret">▾</i></button>
+      <button class="ddbtn" id="ddTypeBtn"><span>Types</span> <b class="ddcount"></b><i class="caret">▾</i></button>
       <div class="ddpanel" id="ddTypePanel"></div>
     </div>
     <div class="pill" id="onlyBuilds">✓ Avec build</div>
@@ -289,8 +292,15 @@
   const NATION_FULL = { ussr: "U.R.S.S.", germany: "Allemagne", usa: "États-Unis",
     france: "France", uk: "Royaume-Uni", china: "Chine", japan: "Japon",
     czech: "Tchécoslovaquie", poland: "Pologne", sweden: "Suède", italy: "Italie" };
-  const TYPE_ICON = { heavyTank: "🛡", mediumTank: "⚔", lightTank: "⚡",
-                      "AT-SPG": "🎯", SPG: "💥" };
+  // Icônes de type façon jeu (SVG géométriques, héritent de la couleur du texte).
+  const sv = (inner) => `<svg class="tsvg" viewBox="0 0 16 16" aria-hidden="true">${inner}</svg>`;
+  const TYPE_SVG = {
+    heavyTank: sv(`<rect x="3" y="3" width="10" height="10" rx="2"/>`),
+    mediumTank: sv(`<path d="M8 1.5 L14.5 8 L8 14.5 L1.5 8 Z"/>`),
+    lightTank: sv(`<path d="M8 1.8 L14.2 8 L8 14.2 L1.8 8 Z" fill="none" stroke="currentColor" stroke-width="2"/>`),
+    "AT-SPG": sv(`<path d="M8 2 L14.5 13.5 L1.5 13.5 Z"/>`),
+    SPG: sv(`<path d="M1.5 12.5 A6.5 6.5 0 0 1 14.5 12.5 Z"/>`),
+  };
   const FLAG = { ussr: "🇷🇺", germany: "🇩🇪", usa: "🇺🇸", france: "🇫🇷", uk: "🇬🇧",
                  china: "🇨🇳", japan: "🇯🇵", czech: "🇨🇿", poland: "🇵🇱", sweden: "🇸🇪", italy: "🇮🇹" };
 
@@ -320,7 +330,7 @@
     options.forEach((o) => {
       const lab = document.createElement("label");
       lab.className = "ddopt";
-      lab.innerHTML = `<input type="checkbox"><span class="flag">${o.flag || ""}</span>${o.label}`;
+      lab.innerHTML = `<input type="checkbox">${o.iconHtml || ""}${o.label}`;
       const cb = lab.querySelector("input");
       cb.checked = arr.includes(o.value);
       cb.onchange = () => {
@@ -337,11 +347,12 @@
     const nations = [...new Set(state.tanks.map((t) => t.nation))]
       .sort((a, b) => (NATION_FULL[a] || a).localeCompare(NATION_FULL[b] || b));
     fillDropdown(el("ddNationPanel"),
-      nations.map((n) => ({ value: n, label: NATION_FULL[n] || n, flag: FLAG[n] || "" })),
+      nations.map((n) => ({ value: n, label: NATION_FULL[n] || n,
+        iconHtml: `<span class="flag">${FLAG[n] || ""}</span>` })),
       state.nations);
     const types = TYPE_ORDER.filter((ty) => state.tanks.some((t) => t.type === ty));
     fillDropdown(el("ddTypePanel"),
-      types.map((ty) => ({ value: ty, label: TYPE_FR[ty], flag: TYPE_ICON[ty] || "" })),
+      types.map((ty) => ({ value: ty, label: TYPE_FR[ty], iconHtml: TYPE_SVG[ty] || "" })),
       state.types);
 
     // Ouverture/fermeture des menus.
@@ -393,7 +404,7 @@
         `<div class="dot ${hasBuild(t.slug) ? "ok" : ""}"></div>` +
         `<div class="nm">${t.name}</div>` +
         `<div class="badges"><span class="badge">${FLAG[t.nation] || ""} ${t.nation_fr}</span>` +
-        `<span class="badge">${TYPE_ICON[t.type] || ""} ${TYPE_FR[t.type] || t.type_fr}</span>` +
+        `<span class="badge">${TYPE_SVG[t.type] || ""}${TYPE_FR[t.type] || t.type_fr}</span>` +
         (t.premium ? `<span class="badge prem">★ Prem</span>` : "") + `</div>`;
       c.onclick = () => openModal(t);
       g.appendChild(c);
@@ -450,7 +461,7 @@
       `<img src="${t.icon}" alt="${t.name}">` +
       `<div class="h"><h2>${t.name}</h2>` +
       `<div class="badges"><span class="badge">${FLAG[t.nation] || ""} ${t.nation_fr}</span>` +
-      `<span class="badge">${TYPE_ICON[t.type] || ""} ${t.type_fr}</span>` +
+      `<span class="badge">${TYPE_SVG[t.type] || ""}${t.type_fr}</span>` +
       `<span class="badge">Tier X</span>` +
       (t.premium ? `<span class="badge prem">★ Premium</span>` : "") + `</div>` +
       (b.role ? `<div class="role">▲ ${b.role}</div>` : "") +
@@ -467,23 +478,23 @@
           (multi || s.label ? `<div class="setup-label">${s.label || "Compo"}</div>` : "") +
           equipSlots(s.slots)).join("");
       if (b.consumables?.length)
-        c += `<div class="section"><h3>🧰 Consommables</h3>${chips(b.consumables)}</div>`;
+        c += `<div class="section"><h3>Consommables</h3>${chips(b.consumables)}</div>`;
       if (b.ammo)
-        c += `<div class="section"><h3>💥 Obus</h3><div class="ammo">${b.ammo}</div></div>`;
-      tabs.push({ k: "equip", label: "🔧 Équipements", html: c });
+        c += `<div class="section"><h3>Obus</h3><div class="ammo">${b.ammo}</div></div>`;
+      tabs.push({ k: "equip", label: "Équipements", html: c });
     }
     if (b.fieldModsTree?.length)
-      tabs.push({ k: "fm", label: "🛠️ Directives", html: fmTree(b.fieldModsTree) });
+      tabs.push({ k: "fm", label: "Amélioration de terrain", html: fmTree(b.fieldModsTree) });
     else if (b.fieldMods?.length)
-      tabs.push({ k: "fm", label: "🛠️ Directives", html: chips(b.fieldMods) });
+      tabs.push({ k: "fm", label: "Amélioration de terrain", html: chips(b.fieldMods) });
     if (b.crew?.length)
-      tabs.push({ k: "crew", label: "🎖️ Équipage", html: slots(b.crew) });
+      tabs.push({ k: "crew", label: "Équipage", html: slots(b.crew) });
     if (b.note)
-      tabs.push({ k: "note", label: "📝 Note", html: `<div class="note">${b.note}</div>` });
+      tabs.push({ k: "note", label: "Note", html: `<div class="note">${b.note}</div>` });
 
     let body;
     if (!tabs.length) {
-      body = `<div class="todo">🔧 Build compétitif à venir pour ce char.</div>`;
+      body = `<div class="todo">Build compétitif à venir pour ce char.</div>`;
     } else {
       const bar = tabs.map((tb, i) =>
         `<button class="tab ${i === 0 ? "on" : ""}" data-k="${tb.k}">${tb.label}</button>`).join("");
@@ -493,7 +504,7 @@
     }
 
     const html = head + `<div class="body">` + body +
-      `<a class="armor" href="${armor}" target="_blank" rel="noopener">🛡️ Voir le blindage 3D sur tanks.gg ↗</a></div>`;
+      `<a class="armor" href="${armor}" target="_blank" rel="noopener">Voir le blindage 3D sur tanks.gg ↗</a></div>`;
 
     el("modal").innerHTML = html;
     el("modal").querySelectorAll(".tab").forEach((btn) => {
