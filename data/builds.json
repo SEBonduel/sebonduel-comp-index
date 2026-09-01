@@ -15,13 +15,8 @@
   },
   "is-7": {
     "equipment": [
-      { "label": "Standard (assaut)", "slots": ["Stabilisateur vertical", "Rassembleur d'obus", "Turbocompresseur"] },
-      { "label": "Défense / spot", "slots": ["Stabilisateur vertical", "Rassembleur d'obus", "Optique améliorée"] }
-    ],
-    "fieldMods": ["Renforcement de la caisse", "Réglage du moteur"],
-    "crew": ["6e sens", "Réparation", "Frères d'armes", "Roi de la route"],
-    "consumables": ["Trousse de secours", "Kit de réparation", "Ration améliorée"],
-    "ammo": "25 APCR · 5 HE",
-    "note": "Pointe blindée : encaisse en angle fort, joue les corners. En compo assaut, turbo pour prendre les positions clés au départ. (Exemple de démo - à remplacer par ton vrai build.)"
+      { "label": "Assaut", "slots": ["Stabilisateur vertical", "Fouloir de canon", "Turbocompresseur"] },
+      { "label": "Mobilité", "slots": ["Stabilisateur vertical", "Crampons de chenilles", "Turbocompresseur"] }
+    ]
   }
 }
