@@ -51,6 +51,23 @@
     from { transform: translate3d(0,0,0) scale(1); }
     to { transform: translate3d(-3%, 4%, 0) scale(1.08); }
   }
+  /* Couche 3 : effets (silhouette char en filigrane + balayage + scanlines) */
+  #fx { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+    background: repeating-linear-gradient(0deg, rgba(160,190,255,.014) 0 1px, transparent 1px 3px); }
+  #fx::before {
+    content: ""; position: absolute; right: -3%; bottom: -10%; width: 640px; height: 640px;
+    background: url('https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/vehicle/germany-G42_Maus.png') no-repeat center / contain;
+    filter: grayscale(1) brightness(1.6); opacity: .06; transform: scaleX(-1);
+  }
+  #fx::after {
+    content: ""; position: absolute; top: -50%; left: 0; width: 45%; height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(51,230,255,.07), transparent);
+    transform: rotate(16deg); animation: sweep 16s linear infinite;
+  }
+  @keyframes sweep {
+    0% { transform: translateX(-120%) rotate(16deg); }
+    100% { transform: translateX(320%) rotate(16deg); }
+  }
   a { color: var(--gold); text-decoration: none; }
 
   header { padding: 34px 20px 8px; text-align: center; position: relative; }
@@ -282,6 +299,7 @@
 </style>
 </head>
 <body>
+<div id="fx" aria-hidden="true"></div>
 <header>
   <h1><b>Index Compétitif</b> - Tier X</h1>
   <div class="sub">Équipements, directives, équipage et consommables pour le jeu en équipe (World of Tanks)</div>
