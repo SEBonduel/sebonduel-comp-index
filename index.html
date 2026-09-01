@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEBonduel - Index Compétitif Tier X (World of Tanks)</title>
+<title>Index Compétitif Tier X (World of Tanks)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
@@ -79,6 +79,16 @@
   .count { color: var(--cyan); font-size: 12px; margin-left: auto; font-weight: 700;
     letter-spacing: 1px; text-transform: uppercase; font-family: "Orbitron", sans-serif; }
 
+  /* Sélecteur segmenté Meta / Situationnels / Tous */
+  .seg { display: inline-flex; background: var(--panel2); border: 1px solid var(--line);
+    border-radius: 9px; padding: 3px; gap: 3px; }
+  .segbtn { background: transparent; border: none; color: var(--muted); cursor: pointer;
+    border-radius: 7px; padding: 6px 13px; font-family: "Rajdhani", sans-serif; font-size: 12px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .6px; transition: .14s; white-space: nowrap; }
+  .segbtn:hover { color: var(--txt); }
+  .segbtn.on { background: linear-gradient(135deg, var(--gold), #ffe38a); color: #17140a;
+    box-shadow: 0 0 14px rgba(255,207,63,.35); }
+
   /* Sélecteurs multi-choix */
   .dropdown { position: relative; }
   .ddbtn { background: var(--panel2); border: 1px solid var(--line); color: var(--txt);
@@ -137,6 +147,10 @@
   .card::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(180deg, rgba(5,7,15,0) 42%, rgba(5,7,15,.6) 70%, rgba(5,7,15,.96) 100%); }
   .card .nm, .card .badges, .card .dot, .card .tier { position: relative; z-index: 1; }
+  .card .metatag { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); z-index: 1;
+    font-family: "Orbitron", sans-serif; font-size: 9px; font-weight: 900; letter-spacing: 1px;
+    color: #17140a; background: linear-gradient(135deg, var(--gold), #ffe38a); padding: 2px 8px;
+    border-radius: 6px; box-shadow: 0 0 12px rgba(255,207,63,.5); }
   .card .tier { position: absolute; top: 10px; left: 10px; font-family: "Orbitron", sans-serif;
     font-weight: 900; font-size: 12px; color: var(--gold); letter-spacing: 1px;
     text-shadow: 0 0 10px rgba(255,207,63,.6); }
@@ -260,6 +274,12 @@
 <div class="toolbar">
   <input type="text" id="search" class="search" placeholder="Rechercher un char par nom…" autocomplete="off">
   <div class="filters">
+    <div class="seg" id="listSeg">
+      <button class="segbtn on" data-m="meta">★ Chars meta</button>
+      <button class="segbtn" data-m="situ">Situationnels</button>
+      <button class="segbtn" data-m="all">Tous</button>
+    </div>
+    <div class="sep"></div>
     <div class="dropdown" id="ddNation">
       <button class="ddbtn" id="ddNationBtn"><span>Nations</span> <b class="ddcount"></b><i class="caret">▾</i></button>
       <div class="ddpanel" id="ddNationPanel"></div>
@@ -286,7 +306,8 @@
 "use strict";
 (function () {
   const el = (id) => document.getElementById(id);
-  const state = { tanks: [], builds: {}, equipment: [], crewskills: [], nations: [], types: [], q: "", onlyBuilds: false };
+  const state = { tanks: [], builds: {}, equipment: [], crewskills: [], meta: new Set(),
+                  listMode: "meta", nations: [], types: [], q: "", onlyBuilds: false };
 
   const TYPE_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
   const TYPE_FR = { heavyTank: "Lourd", mediumTank: "Moyen", lightTank: "Léger",
@@ -355,7 +376,7 @@
       state.nations);
     const types = TYPE_ORDER.filter((ty) => state.tanks.some((t) => t.type === ty));
     fillDropdown(el("ddTypePanel"),
-      types.map((ty) => ({ value: ty, label: TYPE_FR[ty], iconHtml: TYPE_SVG[ty] || "" })),
+      types.map((ty) => ({ value: ty, label: TYPE_FR[ty] })),
       state.types);
 
     // Ouverture/fermeture des menus.
@@ -376,6 +397,14 @@
       document.querySelectorAll(".ddpanel input").forEach((cb) => { cb.checked = false; });
       sync();
     };
+    // Sélecteur segmenté Meta / Situationnels / Tous.
+    document.querySelectorAll("#listSeg .segbtn").forEach((btn) => {
+      btn.onclick = () => {
+        state.listMode = btn.dataset.m;
+        document.querySelectorAll("#listSeg .segbtn").forEach((x) => x.classList.toggle("on", x === btn));
+        render();
+      };
+    });
   }
 
   function sync() {
@@ -390,6 +419,8 @@
   function render() {
     const q = sk(state.q);
     const list = state.tanks.filter((t) =>
+      (state.listMode === "all" ||
+        (state.listMode === "meta" ? state.meta.has(t.slug) : !state.meta.has(t.slug))) &&
       (!state.nations.length || state.nations.includes(t.nation)) &&
       (!state.types.length || state.types.includes(t.type)) &&
       (!state.onlyBuilds || hasBuild(t.slug)) &&
@@ -404,10 +435,11 @@
       c.innerHTML =
         `<div class="bg" style="background-image:url('${t.icon}')"></div>` +
         `<div class="tier">X</div>` +
+        (state.listMode === "all" && state.meta.has(t.slug) ? `<div class="metatag">★ META</div>` : "") +
         `<div class="dot ${hasBuild(t.slug) ? "ok" : ""}"></div>` +
         `<div class="nm">${t.name}</div>` +
         `<div class="badges"><span class="badge">${FLAG[t.nation] || ""} ${t.nation_fr}</span>` +
-        `<span class="badge">${TYPE_SVG[t.type] || ""}${TYPE_FR[t.type] || t.type_fr}</span>` +
+        `<span class="badge">${TYPE_FR[t.type] || t.type_fr}</span>` +
         (t.premium ? `<span class="badge prem">★ Prem</span>` : "") + `</div>`;
       c.onclick = () => openModal(t);
       g.appendChild(c);
@@ -492,7 +524,7 @@
       `<img src="${t.icon}" alt="${t.name}">` +
       `<div class="h"><h2>${t.name}</h2>` +
       `<div class="badges"><span class="badge">${FLAG[t.nation] || ""} ${t.nation_fr}</span>` +
-      `<span class="badge">${TYPE_SVG[t.type] || ""}${t.type_fr}</span>` +
+      `<span class="badge">${t.type_fr}</span>` +
       `<span class="badge">Tier X</span>` +
       (t.premium ? `<span class="badge prem">★ Premium</span>` : "") + `</div>` +
       (b.role ? `<div class="role">▲ ${b.role}</div>` : "") +
@@ -560,12 +592,14 @@
     fetch("data/builds.json").then((r) => r.json()).catch(() => ({})),
     fetch("data/equipment.json").then((r) => r.json()).catch(() => ([])),
     fetch("data/crewskills.json").then((r) => r.json()).catch(() => ([])),
-  ]).then(([tanks, builds, equipment, crewskills]) => {
+    fetch("data/meta.json").then((r) => r.json()).catch(() => ([])),
+  ]).then(([tanks, builds, equipment, crewskills, meta]) => {
     state.tanks = tanks;
     delete builds._schema;
     state.builds = builds;
     state.equipment = equipment;
     state.crewskills = crewskills;
+    state.meta = new Set(meta);
     buildFilters();
     render();
   });
