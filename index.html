@@ -295,6 +295,8 @@
                  china: "🇨🇳", japan: "🇯🇵", czech: "🇨🇿", poland: "🇵🇱", sweden: "🇸🇪", italy: "🇮🇹" };
 
   const norm = (s) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  // Clé de recherche : sans accents, ni espaces/tirets/points (is-7 = is7 = is 7).
+  const sk = (s) => norm(s).replace(/[^a-z0-9]/g, "");
 
   // equipment accepte : 3 chaînes à plat OU [{label, slots[3]}] (1 ou 2 compos).
   function equipSetups(equipment) {
@@ -372,12 +374,12 @@
   }
 
   function render() {
-    const q = norm(state.q);
+    const q = sk(state.q);
     const list = state.tanks.filter((t) =>
       (!state.nations.length || state.nations.includes(t.nation)) &&
       (!state.types.length || state.types.includes(t.type)) &&
       (!state.onlyBuilds || hasBuild(t.slug)) &&
-      (!q || norm(t.name).includes(q)));
+      (!q || sk(t.name).includes(q) || sk(t.slug).includes(q)));
     const g = el("grid");
     g.innerHTML = "";
     el("count").textContent = `${list.length} char${list.length > 1 ? "s" : ""}`;
