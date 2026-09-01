@@ -87,6 +87,15 @@
   header .sub { color: var(--muted); font-size: 14px; margin-top: 12px; letter-spacing: .5px; }
   header .by { color: var(--muted); font-size: 13px; margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
   header .by b { color: var(--gold); font-family: "Orbitron", sans-serif; }
+  .stats { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 16px; }
+  .stat { text-align: center; }
+  .stat b { display: block; font-family: "Orbitron", sans-serif; font-size: 26px; font-weight: 900;
+    line-height: 1; background: linear-gradient(180deg, #fff, var(--cyan));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(51,230,255,.35)); }
+  .stat span { display: block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); margin-top: 4px; }
+  .statsep { width: 1px; height: 30px; background: linear-gradient(180deg, transparent, var(--line), transparent); }
 
   .toolbar { max-width: 1240px; margin: 20px auto 0; padding: 0 16px;
     display: flex; flex-direction: column; gap: 14px; }
@@ -156,7 +165,8 @@
   .grid { max-width: 1240px; margin: 22px auto 70px; padding: 0 16px;
     display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 14px; }
   .card {
-    position: relative; overflow: hidden; cursor: pointer; min-height: 172px;
+    position: relative; overflow: hidden; cursor: pointer; min-height: 186px;
+    transform-style: preserve-3d;
     display: flex; flex-direction: column; justify-content: flex-end; padding: 12px;
     background: linear-gradient(180deg, rgba(24,32,52,.9), rgba(10,14,26,.95));
     border: 1px solid var(--line); border-radius: 4px;
@@ -175,9 +185,9 @@
     box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 26px rgba(51,230,255,.28); }
   .card:hover::before { opacity: 1; }
   .card .bg { position: absolute; inset: 0; background-repeat: no-repeat;
-    background-position: center 36%; background-size: 122%; opacity: .95;
+    background-position: center 34%; background-size: 138%; opacity: .96;
     filter: drop-shadow(0 6px 12px rgba(0,0,0,.7)); transition: transform .2s; }
-  .card:hover .bg { transform: scale(1.06); }
+  .card:hover .bg { transform: scale(1.09); }
   .card::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(180deg, rgba(5,7,15,0) 42%, rgba(5,7,15,.6) 70%, rgba(5,7,15,.96) 100%); }
   .card .nm, .card .badges, .card .dot, .card .tier { position: relative; z-index: 1; }
@@ -187,7 +197,18 @@
     border-radius: 6px; box-shadow: 0 0 12px rgba(255,207,63,.5); }
   .card .tier { position: absolute; top: 10px; left: 10px; font-family: "Orbitron", sans-serif;
     font-weight: 900; font-size: 12px; color: var(--gold); letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(255,207,63,.6); }
+    text-shadow: 0 0 10px rgba(255,207,63,.6); z-index: 1; }
+  /* liseré coloré par type (gauche) */
+  .card .stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; z-index: 1;
+    background: var(--tc, var(--line)); box-shadow: 0 0 12px var(--tc, transparent); }
+  /* anneau de complétion du build */
+  .card .ring { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; z-index: 1;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: conic-gradient(var(--green) calc(var(--p, 0) * 1%), rgba(180,200,255,.14) 0); }
+  .card .ring::after { content: ""; position: absolute; inset: 4px; border-radius: 50%;
+    background: #0c1120; }
+  .card .ring b { position: relative; font-family: "Orbitron", sans-serif; font-size: 8px;
+    font-weight: 900; color: var(--green); }
   .card .nm { font-family: "Orbitron", sans-serif; font-size: 14px; font-weight: 700; text-align: center;
     letter-spacing: .5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     text-shadow: 0 2px 8px rgba(0,0,0,.95); }
@@ -304,6 +325,13 @@
   <h1><b>Index Compétitif</b> - Tier X</h1>
   <div class="sub">Équipements, directives, équipage et consommables pour le jeu en équipe (World of Tanks)</div>
   <div class="by">par <b>SEBonduel</b></div>
+  <div class="stats" id="stats">
+    <div class="stat"><b data-c="chars">0</b><span>Chars</span></div>
+    <div class="statsep"></div>
+    <div class="stat"><b data-c="meta">0</b><span>Meta</span></div>
+    <div class="statsep"></div>
+    <div class="stat"><b data-c="builds">0</b><span>Builds</span></div>
+  </div>
 </header>
 
 <div class="toolbar">
@@ -362,6 +390,8 @@
   };
   const FLAG = { ussr: "🇷🇺", germany: "🇩🇪", usa: "🇺🇸", france: "🇫🇷", uk: "🇬🇧",
                  china: "🇨🇳", japan: "🇯🇵", czech: "🇨🇿", poland: "🇵🇱", sweden: "🇸🇪", italy: "🇮🇹" };
+  const TYPE_COLOR = { heavyTank: "#ff5d6c", mediumTank: "#38ffb0", lightTank: "#33e6ff",
+                       "AT-SPG": "#9b7bff", SPG: "#ffcf3f" };
 
   const norm = (s) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   // Clé de recherche : sans accents, ni espaces/tirets/points (is-7 = is7 = is 7).
@@ -377,11 +407,20 @@
       .filter((s) => s && (s.slots || []).some(Boolean))
       .map((s) => ({ label: s.label || "", slots: (s.slots || []).filter(Boolean) }));
   }
-  const hasBuild = (slug) => {
+  const hasBuild = (slug) => buildPct(slug) > 0;
+  // % de complétion d'un build (6 sections possibles).
+  function buildPct(slug) {
     const b = state.builds[slug];
-    return !!(b && (equipSetups(b.equipment).length || b.note || b.crew?.length ||
-      b.consumables?.length || b.fieldMods?.length || b.fieldModsTree?.length || b.ammo));
-  };
+    if (!b) return 0;
+    let f = 0;
+    if (equipSetups(b.equipment).length) f++;
+    if (b.fieldModsTree?.length || b.fieldMods?.length) f++;
+    if (b.crew?.length) f++;
+    if (b.consumables?.length) f++;
+    if (b.ammo) f++;
+    if (b.note) f++;
+    return Math.round((f / 6) * 100);
+  }
 
   // Construit un menu déroulant multi-choix (cases à cocher) dans `panel`.
   function fillDropdown(panel, options, arr) {
@@ -464,21 +503,28 @@
     g.innerHTML = "";
     el("count").textContent = `${list.length} char${list.length > 1 ? "s" : ""}`;
     if (!list.length) { g.innerHTML = '<div class="empty">Aucun char pour ces filtres.</div>'; return; }
-    for (const t of list) {
+    list.forEach((t, i) => {
       const c = document.createElement("div");
       c.className = "card";
+      c.style.setProperty("--tc", TYPE_COLOR[t.type] || "var(--line)");
+      c.style.animationDelay = Math.min(i * 18, 360) + "ms";
+      const pct = buildPct(t.slug);
+      const ind = pct > 0
+        ? `<div class="ring" style="--p:${pct}"><b>${pct}</b></div>`
+        : `<div class="dot"></div>`;
       c.innerHTML =
         `<div class="bg" style="background-image:url('${t.icon}')"></div>` +
+        `<div class="stripe"></div>` +
         `<div class="tier">X</div>` +
         (state.listMode === "all" && state.meta.has(t.slug) ? `<div class="metatag">★ META</div>` : "") +
-        `<div class="dot ${hasBuild(t.slug) ? "ok" : ""}"></div>` +
+        ind +
         `<div class="nm">${t.name}</div>` +
         `<div class="badges"><span class="badge">${FLAG[t.nation] || ""} ${t.nation_fr}</span>` +
         `<span class="badge">${TYPE_FR[t.type] || t.type_fr}</span>` +
         (t.premium ? `<span class="badge prem">★ Prem</span>` : "") + `</div>`;
       c.onclick = () => openModal(t);
       g.appendChild(c);
-    }
+    });
   }
 
   function slots(arr) {
@@ -622,6 +668,36 @@
   el("backdrop").addEventListener("click", (e) => { if (e.target === el("backdrop")) closeModal(); });
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
+  // Tilt 3D des cartes au survol (délégation sur la grille).
+  let tilted = null;
+  const gridEl = el("grid");
+  gridEl.addEventListener("pointermove", (e) => {
+    const card = e.target.closest(".card");
+    if (tilted && tilted !== card) tilted.style.transform = "";
+    if (!card) { tilted = null; return; }
+    const r = card.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform =
+      `translateY(-4px) perspective(700px) rotateX(${-py * 6}deg) rotateY(${px * 6}deg)`;
+    tilted = card;
+  });
+  gridEl.addEventListener("pointerleave", () => {
+    if (tilted) { tilted.style.transform = ""; tilted = null; }
+  });
+
+  // Compteurs animés (count-up) du header.
+  function countUp(node, target) {
+    if (!node) return;
+    const dur = 900, t0 = performance.now();
+    const step = (t) => {
+      const p = Math.min((t - t0) / dur, 1);
+      node.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
   Promise.all([
     fetch("data/tanks.json").then((r) => r.json()),
     fetch("data/builds.json").then((r) => r.json()).catch(() => ({})),
@@ -637,6 +713,10 @@
     state.meta = new Set(meta);
     buildFilters();
     render();
+    countUp(document.querySelector('[data-c="chars"]'), tanks.length);
+    countUp(document.querySelector('[data-c="meta"]'), state.meta.size);
+    countUp(document.querySelector('[data-c="builds"]'),
+      tanks.filter((t) => hasBuild(t.slug)).length);
   });
 })();
 </script>
