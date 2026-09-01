@@ -107,6 +107,9 @@
   .slot { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
     padding: 8px 12px; font-size: 14px; font-weight: 600; }
   .slot.num::before { content: attr(data-n); color: var(--accent); margin-right: 8px; font-weight: 700; }
+  .slot.eq { display: inline-flex; align-items: center; }
+  .slot .eqic { width: 24px; height: 24px; object-fit: contain; margin: 0 8px 0 2px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip { background: var(--panel2); border: 1px solid var(--line); border-radius: 16px;
     padding: 4px 11px; font-size: 13px; }
@@ -152,7 +155,7 @@
 "use strict";
 (function () {
   const el = (id) => document.getElementById(id);
-  const state = { tanks: [], builds: {}, nation: "", type: "", q: "", onlyBuilds: false };
+  const state = { tanks: [], builds: {}, equipment: [], nation: "", type: "", q: "", onlyBuilds: false };
 
   const TYPE_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
   const TYPE_FR = { heavyTank: "Lourd", mediumTank: "Moyen", lightTank: "Léger",
@@ -238,6 +241,25 @@
     return `<div class="slots">` + arr.map((s, i) =>
       `<div class="slot num" data-n="${i + 1}">${s}</div>`).join("") + `</div>`;
   }
+  // Résout l'icône d'un équipement à partir du texte du slot (nom ou alias).
+  function equipIcon(text) {
+    const t = norm(text);
+    let best = null, len = 0;
+    for (const e of state.equipment) {
+      for (const a of [e.name, ...(e.aliases || [])]) {
+        const na = norm(a);
+        if (na && t.includes(na) && na.length > len) { best = e.icon; len = na.length; }
+      }
+    }
+    return best;
+  }
+  function equipSlots(arr) {
+    return `<div class="slots">` + arr.map((s, i) => {
+      const ic = equipIcon(s);
+      return `<div class="slot num eq" data-n="${i + 1}">` +
+        (ic ? `<img class="eqic" src="${ic}" alt="">` : "") + s + `</div>`;
+    }).join("") + `</div>`;
+  }
   function chips(arr) {
     return `<div class="chips">` + arr.map((s) => `<span class="chip">${s}</span>`).join("") + `</div>`;
   }
@@ -265,7 +287,7 @@
         const multi = setups.length > 1;
         const blocks = setups.map((s) =>
           (multi || s.label ? `<div class="setup-label">${s.label || "Compo"}</div>` : "") +
-          slots(s.slots)).join("");
+          equipSlots(s.slots)).join("");
         html += `<div class="section"><h3>🔧 Équipements${multi ? " (2 compos)" : ""}</h3>${blocks}</div>`;
       }
       if (b.fieldMods?.length)
@@ -296,10 +318,12 @@
   Promise.all([
     fetch("data/tanks.json").then((r) => r.json()),
     fetch("data/builds.json").then((r) => r.json()).catch(() => ({})),
-  ]).then(([tanks, builds]) => {
+    fetch("data/equipment.json").then((r) => r.json()).catch(() => ([])),
+  ]).then(([tanks, builds, equipment]) => {
     state.tanks = tanks;
     delete builds._schema;
     state.builds = builds;
+    state.equipment = equipment;
     buildFilters();
     render();
   });

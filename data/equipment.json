@@ -1,0 +1,176 @@
+[
+  {
+    "name": "Stabilisateur vertical",
+    "aliases": [
+      "stab",
+      "vstab",
+      "stabilisateur",
+      "stab vertical",
+      "stab. vertical",
+      "stabilisateur vertical"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/aimingStabilizer.png"
+  },
+  {
+    "name": "Fouloir de canon",
+    "aliases": [
+      "rammer",
+      "fouloir",
+      "fouloir de canon",
+      "chargement",
+      "rassembleur"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/rammer.png"
+  },
+  {
+    "name": "Ventilation améliorée",
+    "aliases": [
+      "vents",
+      "ventilation",
+      "ventilo",
+      "ventilation améliorée"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedVentilation.png"
+  },
+  {
+    "name": "Optiques traitées",
+    "aliases": [
+      "optique",
+      "optiques",
+      "optics",
+      "optique améliorée",
+      "optiques traitées"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/coatedOptics.png"
+  },
+  {
+    "name": "Système de visée",
+    "aliases": [
+      "aiming",
+      "visée",
+      "systeme de visee",
+      "système de visée",
+      "aim drives",
+      "drives"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/enhancedAimDrives.png"
+  },
+  {
+    "name": "Turbocompresseur",
+    "aliases": [
+      "turbo",
+      "turbocompresseur",
+      "compresseur"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/turbocharger.png"
+  },
+  {
+    "name": "Mécanisme de rotation",
+    "aliases": [
+      "irm",
+      "rotation",
+      "mécanisme de rotation",
+      "mecanisme de rotation"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedRotationMechanism.png"
+  },
+  {
+    "name": "Durcissant amélioré",
+    "aliases": [
+      "durcissant",
+      "hardening",
+      "extra health",
+      "résistance",
+      "resistance",
+      "pv"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/extraHealthReserve.png"
+  },
+  {
+    "name": "Revêtement anti-éclats",
+    "aliases": [
+      "revetement",
+      "revêtement",
+      "spall",
+      "spall liner",
+      "anti-éclats",
+      "anti eclats",
+      "revêtement anti-éclats"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/antifragmentationLining.png"
+  },
+  {
+    "name": "Vision du chef de char",
+    "aliases": [
+      "cvs",
+      "vision",
+      "chef de char",
+      "commander",
+      "vision du chef"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/commandersView.png"
+  },
+  {
+    "name": "Silencieux d'échappement",
+    "aliases": [
+      "lnes",
+      "silencieux",
+      "échappement",
+      "echappement",
+      "exhaust",
+      "invisibilité"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/additionalInvisibilityDevice.png"
+  },
+  {
+    "name": "Télescope binoculaire",
+    "aliases": [
+      "binoculaire",
+      "binocs",
+      "télescope",
+      "telescope",
+      "stereoscope",
+      "jumelles"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/stereoscope.png"
+  },
+  {
+    "name": "Crampons de chenilles",
+    "aliases": [
+      "crampons",
+      "grousers",
+      "chenilles"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/grousers.png"
+  },
+  {
+    "name": "Configuration modifiée",
+    "aliases": [
+      "config",
+      "configuration",
+      "wet ammo",
+      "munitions",
+      "configuration modifiée"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedConfiguration.png"
+  },
+  {
+    "name": "Visée améliorée",
+    "aliases": [
+      "visée améliorée",
+      "visee amelioree",
+      "sights",
+      "viseur"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedSights.png"
+  },
+  {
+    "name": "Équipement radio",
+    "aliases": [
+      "radio",
+      "équipement radio",
+      "equipement radio"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedRadioCommunication.png"
+  }
+]
