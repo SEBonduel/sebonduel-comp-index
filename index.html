@@ -68,6 +68,13 @@
     0% { transform: translateX(-120%) rotate(16deg); }
     100% { transform: translateX(320%) rotate(16deg); }
   }
+  /* Particules ambiantes (canvas) */
+  #particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+  /* Halo lumineux qui suit la souris */
+  #halo { position: fixed; inset: 0; z-index: -1; pointer-events: none; will-change: background;
+    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 25%),
+      rgba(51,230,255,.10), rgba(51,230,255,.03) 40%, transparent 62%); }
+  #fx, #particles { will-change: transform; }
   a { color: var(--gold); text-decoration: none; }
 
   header { padding: 34px 20px 8px; text-align: center; position: relative; }
@@ -171,10 +178,11 @@
     background: linear-gradient(180deg, rgba(24,32,52,.9), rgba(10,14,26,.95));
     border: 1px solid var(--line); border-radius: 4px;
     clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-    transition: transform .16s, box-shadow .16s, border-color .16s;
-    animation: pop .35s ease both;
+    /* état de départ pour l'apparition au scroll */
+    opacity: 0; transform: translateY(26px);
+    transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .16s, border-color .16s;
   }
-  @keyframes pop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .card.in { opacity: 1; transform: none; }
   .card::before {
     content: ""; position: absolute; inset: 0; padding: 1px; border-radius: 4px; pointer-events: none;
     background: linear-gradient(135deg, transparent 40%, rgba(51,230,255,.5), transparent 70%);
@@ -182,7 +190,8 @@
     -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: .16s;
   }
   .card:hover { transform: translateY(-4px); border-color: var(--cyan);
-    box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 26px rgba(51,230,255,.28); }
+    box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 26px rgba(51,230,255,.28);
+    transition: transform .09s ease, box-shadow .16s, border-color .16s; }
   .card:hover::before { opacity: 1; }
   .card .bg { position: absolute; inset: 0; background-repeat: no-repeat;
     background-position: center 34%; background-size: 138%; opacity: .96;
@@ -320,7 +329,9 @@
 </style>
 </head>
 <body>
+<canvas id="particles" aria-hidden="true"></canvas>
 <div id="fx" aria-hidden="true"></div>
+<div id="halo" aria-hidden="true"></div>
 <header>
   <h1><b>Index Compétitif</b> - Tier X</h1>
   <div class="sub">Équipements, directives, équipage et consommables pour le jeu en équipe (World of Tanks)</div>
@@ -507,7 +518,7 @@
       const c = document.createElement("div");
       c.className = "card";
       c.style.setProperty("--tc", TYPE_COLOR[t.type] || "var(--line)");
-      c.style.animationDelay = Math.min(i * 18, 360) + "ms";
+      c.style.transitionDelay = ((i % 6) * 45) + "ms";  // cascade par rangée
       const pct = buildPct(t.slug);
       const ind = pct > 0
         ? `<div class="ring" style="--p:${pct}"><b>${pct}</b></div>`
@@ -524,8 +535,16 @@
         (t.premium ? `<span class="badge prem">★ Prem</span>` : "") + `</div>`;
       c.onclick = () => openModal(t);
       g.appendChild(c);
+      revealIO.observe(c);
     });
   }
+
+  // Apparition au scroll : révèle chaque carte quand elle entre dans la vue.
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("in"); revealIO.unobserve(e.target); }
+    });
+  }, { rootMargin: "0px 0px -40px 0px", threshold: 0.04 });
 
   function slots(arr) {
     return `<div class="slots">` + arr.map((s, i) =>
@@ -697,6 +716,50 @@
     };
     requestAnimationFrame(step);
   }
+
+  // Particules ambiantes (étincelles cyan/or qui montent).
+  (function particles() {
+    const cv = el("particles"), ctx = cv.getContext("2d");
+    let w, h, parts;
+    const spawn = () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: Math.random() * 1.6 + 0.4, vy: -(Math.random() * 0.25 + 0.05),
+      vx: (Math.random() - 0.5) * 0.12, a: Math.random() * 0.5 + 0.2,
+      c: Math.random() < 0.5 ? "51,230,255" : "255,207,63",
+    });
+    const resize = () => {
+      w = cv.width = innerWidth; h = cv.height = innerHeight;
+      parts = Array.from({ length: Math.min(64, Math.floor(w * h / 26000)) }, spawn);
+    };
+    const tick = () => {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of parts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.y < -6) { p.y = h + 6; p.x = Math.random() * w; }
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
+        ctx.shadowBlur = 8; ctx.shadowColor = "rgba(" + p.c + ",0.7)";
+        ctx.fillStyle = "rgba(" + p.c + "," + p.a + ")"; ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    };
+    addEventListener("resize", resize); resize(); tick();
+  })();
+
+  // Halo qui suit la souris + parallax du décor.
+  let raf = 0, mX = innerWidth / 2, mY = innerHeight / 2;
+  addEventListener("pointermove", (e) => {
+    mX = e.clientX; mY = e.clientY;
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const halo = el("halo");
+      halo.style.setProperty("--mx", mX + "px");
+      halo.style.setProperty("--my", mY + "px");
+      const dx = mX / innerWidth - 0.5, dy = mY / innerHeight - 0.5;
+      el("fx").style.transform = `translate(${dx * -20}px, ${dy * -20}px)`;
+      el("particles").style.transform = `translate(${dx * -9}px, ${dy * -9}px)`;
+    });
+  });
 
   Promise.all([
     fetch("data/tanks.json").then((r) => r.json()),
