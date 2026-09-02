@@ -404,11 +404,29 @@
   };
   // Drapeaux en IMAGES (flagcdn) : rendent partout, y compris Windows (qui n'affiche
   // pas les emojis-drapeaux). ISO du pays par nation WoT.
-  const FLAG_CODE = { ussr: "ru", germany: "de", usa: "us", france: "fr", uk: "gb",
+  // Drapeaux modernes (flagcdn) pour les nations dont WoT utilise le drapeau actuel.
+  const FLAG_CODE = { usa: "us", france: "fr", uk: "gb",
                       china: "cn", japan: "jp", czech: "cz", poland: "pl", sweden: "se", italy: "it" };
-  const flagImg = (n) => FLAG_CODE[n]
-    ? `<img class="flag-img" src="https://flagcdn.com/24x18/${FLAG_CODE[n]}.png" alt="" loading="lazy">`
-    : "";
+  // Drapeaux « façon WoT » différents du drapeau moderne -> SVG maison :
+  //  - URSS : rouge + étoile/marteau-faucille dorés (pas le tricolore russe)
+  //  - Allemagne : noir-blanc-rouge (Empire), pas le noir-rouge-or moderne
+  const svgFlag = (svg) => "data:image/svg+xml," + encodeURIComponent(svg);
+  const CUSTOM_FLAG = {
+    ussr: svgFlag("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'>" +
+      "<rect width='24' height='18' fill='#c40000'/><g fill='#ffd400'>" +
+      "<path d='M6 1.9l.72 2.2h2.32l-1.88 1.36.72 2.2L6 6.3 3.12 7.66l.72-2.2L1.96 4.1h2.32z'/>" +
+      "<path d='M3.7 9.1c0 2 1.6 3.6 3.6 3.8-1.6-.65-2.6-2.1-2.6-3.8z'/>" +
+      "<rect x='6.4' y='9' width='3.1' height='0.9' transform='rotate(45 6.4 9)'/>" +
+      "<circle cx='9' cy='12' r='.85'/></g></svg>"),
+    germany: svgFlag("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'>" +
+      "<rect width='24' height='6' fill='#141414'/><rect y='6' width='24' height='6' fill='#f5f5f5'/>" +
+      "<rect y='12' width='24' height='6' fill='#c40000'/></svg>"),
+  };
+  const flagImg = (n) => {
+    const src = CUSTOM_FLAG[n] ||
+      (FLAG_CODE[n] ? `https://flagcdn.com/24x18/${FLAG_CODE[n]}.png` : null);
+    return src ? `<img class="flag-img" src="${src}" alt="" loading="lazy">` : "";
+  };
   const TYPE_COLOR = { heavyTank: "#ff5d6c", mediumTank: "#38ffb0", lightTank: "#33e6ff",
                        "AT-SPG": "#9b7bff", SPG: "#ffcf3f" };
 
