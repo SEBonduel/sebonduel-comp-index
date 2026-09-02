@@ -76,6 +76,9 @@
       rgba(51,230,255,.10), rgba(51,230,255,.03) 40%, transparent 62%); }
   #fx, #particles { will-change: transform; }
   a { color: var(--gold); text-decoration: none; }
+  .flag-img { width: 17px; height: 13px; border-radius: 2px; object-fit: cover;
+    vertical-align: -2px; margin-right: 5px; box-shadow: 0 0 0 1px rgba(0,0,0,.35); }
+  .ddopt .flag-img { width: 22px; height: 16px; margin-right: 4px; }
 
   header { padding: 34px 20px 8px; text-align: center; position: relative; }
   header h1 {
@@ -399,8 +402,13 @@
     "AT-SPG": sv(`<path d="M8 2 L14.5 13.5 L1.5 13.5 Z"/>`),
     SPG: sv(`<path d="M1.5 12.5 A6.5 6.5 0 0 1 14.5 12.5 Z"/>`),
   };
-  const FLAG = { ussr: "🇷🇺", germany: "🇩🇪", usa: "🇺🇸", france: "🇫🇷", uk: "🇬🇧",
-                 china: "🇨🇳", japan: "🇯🇵", czech: "🇨🇿", poland: "🇵🇱", sweden: "🇸🇪", italy: "🇮🇹" };
+  // Drapeaux en IMAGES (flagcdn) : rendent partout, y compris Windows (qui n'affiche
+  // pas les emojis-drapeaux). ISO du pays par nation WoT.
+  const FLAG_CODE = { ussr: "ru", germany: "de", usa: "us", france: "fr", uk: "gb",
+                      china: "cn", japan: "jp", czech: "cz", poland: "pl", sweden: "se", italy: "it" };
+  const flagImg = (n) => FLAG_CODE[n]
+    ? `<img class="flag-img" src="https://flagcdn.com/24x18/${FLAG_CODE[n]}.png" alt="" loading="lazy">`
+    : "";
   const TYPE_COLOR = { heavyTank: "#ff5d6c", mediumTank: "#38ffb0", lightTank: "#33e6ff",
                        "AT-SPG": "#9b7bff", SPG: "#ffcf3f" };
 
@@ -457,7 +465,7 @@
       .sort((a, b) => (NATION_FULL[a] || a).localeCompare(NATION_FULL[b] || b));
     fillDropdown(el("ddNationPanel"),
       nations.map((n) => ({ value: n, label: NATION_FULL[n] || n,
-        iconHtml: `<span class="flag">${FLAG[n] || ""}</span>` })),
+        iconHtml: flagImg(n) })),
       state.nations);
     const types = TYPE_ORDER.filter((ty) => state.tanks.some((t) => t.type === ty));
     fillDropdown(el("ddTypePanel"),
@@ -530,7 +538,7 @@
         (state.listMode === "all" && state.meta.has(t.slug) ? `<div class="metatag">★ META</div>` : "") +
         ind +
         `<div class="nm">${t.name}</div>` +
-        `<div class="badges"><span class="badge">${FLAG[t.nation] || ""} ${t.nation_fr}</span>` +
+        `<div class="badges"><span class="badge">${flagImg(t.nation)}${t.nation_fr}</span>` +
         `<span class="badge">${TYPE_FR[t.type] || t.type_fr}</span>` +
         (t.premium ? `<span class="badge prem">★ Prem</span>` : "") + `</div>`;
       c.onclick = () => openModal(t);
@@ -623,7 +631,7 @@
       `<div class="top">` +
       `<img src="${t.icon}" alt="${t.name}">` +
       `<div class="h"><h2>${t.name}</h2>` +
-      `<div class="badges"><span class="badge">${FLAG[t.nation] || ""} ${t.nation_fr}</span>` +
+      `<div class="badges"><span class="badge">${flagImg(t.nation)}${t.nation_fr}</span>` +
       `<span class="badge">${t.type_fr}</span>` +
       `<span class="badge">Tier X</span>` +
       (t.premium ? `<span class="badge prem">★ Premium</span>` : "") + `</div>` +
