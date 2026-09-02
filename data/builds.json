@@ -147,5 +147,16 @@
         ]
       }
     ]
+  },
+  "amx-50-b": {
+    "equipment": [
+      {
+        "slots": [
+          "Durcissement amélioré",
+          "Compresseur amélioré",
+          "Système de stabilisation"
+        ]
+      }
+    ]
   }
 }

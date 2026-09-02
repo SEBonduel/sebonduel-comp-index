@@ -32,7 +32,7 @@ CURATION = [
     ("improvedRotationMechanism", "Mécanisme de rotation",
      ["irm", "rotation", "mécanisme de rotation", "mecanisme de rotation"]),
     ("extraHealthReserve", "Durcissant amélioré",
-     ["durcissant", "hardening", "extra health", "résistance", "resistance", "pv"]),
+     ["durcissant", "durcissement", "hardening", "extra health", "résistance", "resistance", "pv"]),
     ("antifragmentationLining", "Revêtement anti-éclats",
      ["revetement", "revêtement", "spall", "spall liner", "anti-éclats", "anti eclats", "revêtement anti-éclats"]),
     ("commandersView", "Vision du chef de char",
