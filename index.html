@@ -291,8 +291,14 @@
     padding: 9px 13px; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; }
   .slot.num::before { content: attr(data-n); color: var(--gold); margin-right: 9px; font-weight: 900;
     font-family: "Orbitron", sans-serif; font-size: 12px; }
-  .slot .eqic { width: 26px; height: 26px; object-fit: contain; margin: 0 9px 0 2px;
+  .slot .eqwrap { position: relative; display: inline-flex; margin: 0 9px 0 2px; }
+  .slot .eqic { width: 26px; height: 26px; object-fit: contain;
     filter: drop-shadow(0 1px 3px rgba(0,0,0,.7)); }
+  .slot .bondmk { position: absolute; top: -6px; right: -7px; width: 14px; height: 14px;
+    background: #2a1147; border: 1px solid #7b46c9; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 7px rgba(155,92,255,.6); }
+  .slot .bondmk svg { width: 10px; height: 10px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
     padding: 6px 13px; font-size: 14px; font-weight: 600; }
@@ -578,23 +584,30 @@
     return `<div class="slots">` + arr.map((s, i) =>
       `<div class="slot num" data-n="${i + 1}">${s}</div>`).join("") + `</div>`;
   }
-  // Résout l'icône d'un équipement à partir du texte du slot (nom ou alias).
-  function equipIcon(text) {
+  // Résout l'entrée équipement à partir du texte du slot (nom ou alias, match le plus long).
+  function equipMatch(text) {
     const t = norm(text);
     let best = null, len = 0;
     for (const e of state.equipment) {
       for (const a of [e.name, ...(e.aliases || [])]) {
         const na = norm(a);
-        if (na && t.includes(na) && na.length > len) { best = e.icon; len = na.length; }
+        if (na && t.includes(na) && na.length > len) { best = e; len = na.length; }
       }
     }
     return best;
   }
+  // Marqueur bond : double chevron violet (indicateur « amélioré » du jeu).
+  const BOND_MARK = `<span class="bondmk"><svg viewBox="0 0 12 12" aria-hidden="true">` +
+    `<path d="M2 6 L6 2.6 L10 6" fill="none" stroke="#c39bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>` +
+    `<path d="M2 9.2 L6 5.8 L10 9.2" fill="none" stroke="#c39bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
   function equipSlots(arr) {
     return `<div class="slots">` + arr.map((s, i) => {
-      const ic = equipIcon(s);
-      return `<div class="slot num eq" data-n="${i + 1}">` +
-        (ic ? `<img class="eqic" src="${ic}" alt="">` : "") + s + `</div>`;
+      const e = equipMatch(s);
+      const icon = e && e.icon
+        ? `<span class="eqwrap"><img class="eqic" src="${e.icon}" alt="">` +
+          (e.bond ? BOND_MARK : "") + `</span>`
+        : "";
+      return `<div class="slot num eq" data-n="${i + 1}">` + icon + s + `</div>`;
     }).join("") + `</div>`;
   }
   // Résout l'icône d'une compétence d'équipage (nom ou alias).

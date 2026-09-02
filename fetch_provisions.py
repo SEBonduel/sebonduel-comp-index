@@ -49,6 +49,20 @@ CURATION = [
      ["visée améliorée", "visee amelioree", "sights", "viseur"]),
     ("improvedRadioCommunication", "Équipement radio",
      ["radio", "équipement radio", "equipement radio"]),
+
+    # --- Équipements BOND (deluxe) : icônes dorées dédiées, noms exacts en jeu ---
+    ("deluxAimingStabilizer", "Système de stabilisation", ["systeme de stabilisation"]),
+    ("deluxRammer", "Système de chargement innovant", ["systeme de chargement innovant", "chargement innovant"]),
+    ("deluxImprovedVentilation", "Système de ventilation", ["systeme de ventilation"]),
+    ("deluxCoatedOptics", "Optiques expérimentales", ["optiques experimentales"]),
+    ("deluxEnhancedAimDrives", "Système de visée résistant", ["systeme de visee resistant", "visee resistant"]),
+    ("deluxeTurbocharger", "Compresseur amélioré", ["compresseur ameliore"]),
+    ("deluxeImprovedRotationMechanism", "Transmission finale améliorée", ["transmission finale"]),
+    ("deluxeExtraHealthReserve", "Résistance accrue de la coque", ["resistance accrue", "resistance accrue de la coque"]),
+    ("deluxeAdditionalInvisibilityDevice", "Bloc d'échappement furtif", ["bloc d'echappement furtif", "echappement furtif"]),
+    ("deluxeStereoscope", "Système d'observation télescopique", ["observation telescopique"]),
+    ("deluxImprovedConfiguration", "Configuration améliorée", ["configuration amelioree"]),
+    ("deluxeImprovedSights", "Ciblage innovant", ["ciblage innovant"]),
 ]
 
 
@@ -73,7 +87,9 @@ def main():
         if not icon:
             print(f"  warn: icône introuvable pour {frag}")
             continue
-        out.append({"name": name, "aliases": aliases, "icon": icon})
+        # bond (deluxe) : marqué pour afficher les chevrons violets « amélioré ».
+        out.append({"name": name, "aliases": aliases, "icon": icon,
+                    "bond": frag.startswith("delux")})
 
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"{len(out)} équipements -> {OUT.relative_to(OUT.parent.parent)}")

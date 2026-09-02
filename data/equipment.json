@@ -9,7 +9,8 @@
       "stab. vertical",
       "stabilisateur vertical"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/aimingStabilizer.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/aimingStabilizer.png",
+    "bond": false
   },
   {
     "name": "Fouloir de canon",
@@ -20,7 +21,8 @@
       "chargement",
       "rassembleur"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/rammer.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/rammer.png",
+    "bond": false
   },
   {
     "name": "Ventilation améliorée",
@@ -30,7 +32,8 @@
       "ventilo",
       "ventilation améliorée"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedVentilation.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedVentilation.png",
+    "bond": false
   },
   {
     "name": "Optiques traitées",
@@ -41,7 +44,8 @@
       "optique améliorée",
       "optiques traitées"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/coatedOptics.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/coatedOptics.png",
+    "bond": false
   },
   {
     "name": "Système de visée",
@@ -53,7 +57,8 @@
       "aim drives",
       "drives"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/enhancedAimDrives.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/enhancedAimDrives.png",
+    "bond": false
   },
   {
     "name": "Turbocompresseur",
@@ -62,7 +67,8 @@
       "turbocompresseur",
       "compresseur"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/turbocharger.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/turbocharger.png",
+    "bond": false
   },
   {
     "name": "Mécanisme de rotation",
@@ -72,7 +78,8 @@
       "mécanisme de rotation",
       "mecanisme de rotation"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedRotationMechanism.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedRotationMechanism.png",
+    "bond": false
   },
   {
     "name": "Durcissant amélioré",
@@ -84,7 +91,8 @@
       "resistance",
       "pv"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/extraHealthReserve.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/extraHealthReserve.png",
+    "bond": false
   },
   {
     "name": "Revêtement anti-éclats",
@@ -97,7 +105,8 @@
       "anti eclats",
       "revêtement anti-éclats"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/antifragmentationLining.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/antifragmentationLining.png",
+    "bond": false
   },
   {
     "name": "Vision du chef de char",
@@ -108,7 +117,8 @@
       "commander",
       "vision du chef"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/commandersView.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/commandersView.png",
+    "bond": false
   },
   {
     "name": "Silencieux d'échappement",
@@ -120,7 +130,8 @@
       "exhaust",
       "invisibilité"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/additionalInvisibilityDevice.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/additionalInvisibilityDevice.png",
+    "bond": false
   },
   {
     "name": "Télescope binoculaire",
@@ -132,7 +143,8 @@
       "stereoscope",
       "jumelles"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/stereoscope.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/stereoscope.png",
+    "bond": false
   },
   {
     "name": "Crampons de chenilles",
@@ -141,7 +153,8 @@
       "grousers",
       "chenilles"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/grousers.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/grousers.png",
+    "bond": false
   },
   {
     "name": "Configuration modifiée",
@@ -152,7 +165,8 @@
       "munitions",
       "configuration modifiée"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedConfiguration.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedConfiguration.png",
+    "bond": false
   },
   {
     "name": "Visée améliorée",
@@ -162,7 +176,8 @@
       "sights",
       "viseur"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedSights.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedSights.png",
+    "bond": false
   },
   {
     "name": "Équipement radio",
@@ -171,6 +186,107 @@
       "équipement radio",
       "equipement radio"
     ],
-    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedRadioCommunication.png"
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedRadioCommunication.png",
+    "bond": false
+  },
+  {
+    "name": "Système de stabilisation",
+    "aliases": [
+      "systeme de stabilisation"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/aimingStabilizer.png",
+    "bond": true
+  },
+  {
+    "name": "Système de chargement innovant",
+    "aliases": [
+      "systeme de chargement innovant",
+      "chargement innovant"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/rammer.png",
+    "bond": true
+  },
+  {
+    "name": "Système de ventilation",
+    "aliases": [
+      "systeme de ventilation"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedVentilation.png",
+    "bond": true
+  },
+  {
+    "name": "Optiques expérimentales",
+    "aliases": [
+      "optiques experimentales"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/coatedOptics.png",
+    "bond": true
+  },
+  {
+    "name": "Système de visée résistant",
+    "aliases": [
+      "systeme de visee resistant",
+      "visee resistant"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/enhancedAimDrives.png",
+    "bond": true
+  },
+  {
+    "name": "Compresseur amélioré",
+    "aliases": [
+      "compresseur ameliore"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/turbocharger.png",
+    "bond": true
+  },
+  {
+    "name": "Transmission finale améliorée",
+    "aliases": [
+      "transmission finale"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedRotationMechanism.png",
+    "bond": true
+  },
+  {
+    "name": "Résistance accrue de la coque",
+    "aliases": [
+      "resistance accrue",
+      "resistance accrue de la coque"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/extraHealthReserve.png",
+    "bond": true
+  },
+  {
+    "name": "Bloc d'échappement furtif",
+    "aliases": [
+      "bloc d'echappement furtif",
+      "echappement furtif"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/additionalInvisibilityDevice.png",
+    "bond": true
+  },
+  {
+    "name": "Système d'observation télescopique",
+    "aliases": [
+      "observation telescopique"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/stereoscope.png",
+    "bond": true
+  },
+  {
+    "name": "Configuration améliorée",
+    "aliases": [
+      "configuration amelioree"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedConfiguration.png",
+    "bond": true
+  },
+  {
+    "name": "Ciblage innovant",
+    "aliases": [
+      "ciblage innovant"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedSights.png",
+    "bond": true
   }
 ]
