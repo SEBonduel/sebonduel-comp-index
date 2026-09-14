@@ -183,6 +183,19 @@
           "Système de stabilisation"
         ]
       }
+    ],
+    "crew": [
+      {
+        "role": "Commandant",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Œil de lynx",
+          "Urgence",
+          "Coordination",
+          "Praticité"
+        ]
+      }
     ]
   },
   "obj-260": {
