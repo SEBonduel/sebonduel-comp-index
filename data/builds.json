@@ -409,5 +409,93 @@
     ],
     "ammo": "20 APCR · 16 HEAT · 4 HE",
     "role": "Lourd polyvalent"
+  },
+  "rhm-pzw": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
+  },
+  "wz-132-1": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
+  },
+  "amx-13-105": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
+  },
+  "ebr-105": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
+  },
+  "manticore": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
+  },
+  "tes-k": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
+  },
+  "t-100-lt": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
+  },
+  "sheridan": {
+    "equipment": [
+      {
+        "slots": [
+          "Système de vision du chef de char",
+          "Optiques expérimentales",
+          "Bloc d'échappement furtif"
+        ]
+      }
+    ]
   }
 }
