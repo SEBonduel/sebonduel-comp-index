@@ -232,6 +232,12 @@
           "Expert en communications"
         ]
       }
+    ],
+    "ammo": "56 APCR",
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
     ]
   },
   "obj-260": {
