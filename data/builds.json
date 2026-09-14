@@ -171,9 +171,9 @@
       }
     ],
     "consumables": [
-      "Trousse de secours",
-      "Ration de combat supplémentaire",
-      "Kit de réparation"
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
     ],
     "ammo": "25 APCR · 3 HE",
     "note": "Char très polyvalent, mobile et blindage fiable, il servira surtout pour rush ou prendre des positions avancées rapidement en début de bataille."
@@ -383,9 +383,9 @@
       }
     ],
     "consumables": [
-      "Trousse de secours",
-      "Ration de combat supplémentaire",
-      "Kit de réparation"
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
     ],
     "ammo": "20 APCR · 16 HEAT · 4 HE",
     "role": "Lourd polyvalent"
@@ -399,6 +399,11 @@
           "Bloc d'échappement furtif"
         ]
       }
+    ],
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
     ]
   },
   "wz-132-1": {
@@ -410,6 +415,11 @@
           "Bloc d'échappement furtif"
         ]
       }
+    ],
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
     ]
   },
   "amx-13-105": {
@@ -421,6 +431,11 @@
           "Bloc d'échappement furtif"
         ]
       }
+    ],
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
     ]
   },
   "ebr-105": {
@@ -547,6 +562,11 @@
           ]
         ]
       }
+    ],
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
     ]
   },
   "tes-k": {
@@ -558,6 +578,11 @@
           "Bloc d'échappement furtif"
         ]
       }
+    ],
+    "consumables": [
+      "Kit de réparation",
+      "Buchty",
+      "Trousse de soin"
     ]
   },
   "t-100-lt": {
@@ -569,6 +594,11 @@
           "Bloc d'échappement furtif"
         ]
       }
+    ],
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
     ]
   },
   "sheridan": {
@@ -580,6 +610,767 @@
           "Bloc d'échappement furtif"
         ]
       }
+    ],
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "e-100": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "e-50-m": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "g-w-e-100": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "grille-15": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "jg-pz-e-100": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "kpz-07-p-e": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "leopard-1": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "maus": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "phonix": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "pz-kpfw-vii": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "schwertwal": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "vk-72-01-k": {
+    "consumables": [
+      "Kit de réparation",
+      "Chocolat",
+      "Trousse de soin"
+    ]
+  },
+  "113": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "113-bo": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "114-sp2": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "116-f3": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "121": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "121b": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "bz-72-1": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "bz-75": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "bzt-70": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "divine-valor": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "erlang-shen": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "monkey-king": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "wz-111-5a": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "wz-111-ql": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "wz-113g-ft": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat améliorées",
+      "Trousse de soin"
+    ]
+  },
+  "amx-30-b": {
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
+  },
+  "amx-m4-54": {
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
+  },
+  "b-c-155-58": {
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
+  },
+  "b-c-25-t": {
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
+  },
+  "durendal": {
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
+  },
+  "foch-155": {
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
+  },
+  "foch-b": {
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
+  },
+  "carro-45-t": {
+    "consumables": [
+      "Kit de réparation",
+      "Spaghetti bolognaise",
+      "Trousse de soin"
+    ]
+  },
+  "coccodrillo": {
+    "consumables": [
+      "Kit de réparation",
+      "Spaghetti bolognaise",
+      "Trousse de soin"
+    ]
+  },
+  "lion": {
+    "consumables": [
+      "Kit de réparation",
+      "Spaghetti bolognaise",
+      "Trousse de soin"
+    ]
+  },
+  "minotauro": {
+    "consumables": [
+      "Kit de réparation",
+      "Spaghetti bolognaise",
+      "Trousse de soin"
+    ]
+  },
+  "progetto-65": {
+    "consumables": [
+      "Kit de réparation",
+      "Spaghetti bolognaise",
+      "Trousse de soin"
+    ]
+  },
+  "rinoceronte": {
+    "consumables": [
+      "Kit de réparation",
+      "Spaghetti bolognaise",
+      "Trousse de soin"
+    ]
+  },
+  "ashigaru": {
+    "consumables": [
+      "Kit de réparation",
+      "Onigiri",
+      "Trousse de soin"
+    ]
+  },
+  "ho-ri-3": {
+    "consumables": [
+      "Kit de réparation",
+      "Onigiri",
+      "Trousse de soin"
+    ]
+  },
+  "stb-1": {
+    "consumables": [
+      "Kit de réparation",
+      "Onigiri",
+      "Trousse de soin"
+    ]
+  },
+  "type-5-h": {
+    "consumables": [
+      "Kit de réparation",
+      "Onigiri",
+      "Trousse de soin"
+    ]
+  },
+  "type-71": {
+    "consumables": [
+      "Kit de réparation",
+      "Onigiri",
+      "Trousse de soin"
+    ]
+  },
+  "60tp": {
+    "consumables": [
+      "Kit de réparation",
+      "Tartines de Smalec",
+      "Trousse de soin"
+    ]
+  },
+  "ashbringer": {
+    "consumables": [
+      "Kit de réparation",
+      "Tartines de Smalec",
+      "Trousse de soin"
+    ]
+  },
+  "bzyg": {
+    "consumables": [
+      "Kit de réparation",
+      "Tartines de Smalec",
+      "Trousse de soin"
+    ]
+  },
+  "b-yskawica": {
+    "consumables": [
+      "Kit de réparation",
+      "Tartines de Smalec",
+      "Trousse de soin"
+    ]
+  },
+  "cs-63": {
+    "consumables": [
+      "Kit de réparation",
+      "Tartines de Smalec",
+      "Trousse de soin"
+    ]
+  },
+  "hurricane": {
+    "consumables": [
+      "Kit de réparation",
+      "Tartines de Smalec",
+      "Trousse de soin"
+    ]
+  },
+  "badger": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "canopener": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "centurion-ax": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "chieftain": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "concept-5": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "conqueror-gc": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "fv215b": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "fv215b-183": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "fv4005": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "gryphon": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "s-conqueror": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "t95-fv4201": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "triumphant": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "twin-guardians": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "vickers-3": {
+    "consumables": [
+      "Kit de réparation",
+      "Pudding et thé",
+      "Trousse de soin"
+    ]
+  },
+  "kranvagn": {
+    "consumables": [
+      "Kit de réparation",
+      "Café avec brioches à la cannelle",
+      "Trousse de soin"
+    ]
+  },
+  "strv-103b": {
+    "consumables": [
+      "Kit de réparation",
+      "Café avec brioches à la cannelle",
+      "Trousse de soin"
+    ]
+  },
+  "udes-15-16": {
+    "consumables": [
+      "Kit de réparation",
+      "Café avec brioches à la cannelle",
+      "Trousse de soin"
+    ]
+  },
+  "dbv-152": {
+    "consumables": [
+      "Kit de réparation",
+      "Buchty",
+      "Trousse de soin"
+    ]
+  },
+  "dravec": {
+    "consumables": [
+      "Kit de réparation",
+      "Buchty",
+      "Trousse de soin"
+    ]
+  },
+  "tvp-t-50-51": {
+    "consumables": [
+      "Kit de réparation",
+      "Buchty",
+      "Trousse de soin"
+    ]
+  },
+  "vz-55": {
+    "consumables": [
+      "Kit de réparation",
+      "Buchty",
+      "Trousse de soin"
+    ]
+  },
+  "vz-55-gw": {
+    "consumables": [
+      "Kit de réparation",
+      "Buchty",
+      "Trousse de soin"
+    ]
+  },
+  "is-4": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "k-91": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-140": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-140-cl": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-261": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-268": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-268-4": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-268-5": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-277": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-279-e": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-430u": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-452k": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-705a": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-780": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "obj-907": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "st-62-ver-2": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "st-ii": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "t-13": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "t-22-med": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "t-62a": {
+    "consumables": [
+      "Kit de réparation",
+      "Rations de combat supplémentaires",
+      "Trousse de soin"
+    ]
+  },
+  "aht-7": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "ares-90": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "m-v-y": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "m48-patton": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "m60": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "mbt-b": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "stinger": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "t110e3": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "t110e4": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "t110e5": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "t110e5-cl": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "t57-heavy": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "t92-hmc": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
+    ]
+  },
+  "t95e6": {
+    "consumables": [
+      "Kit de réparation",
+      "Caisse de Cola",
+      "Trousse de soin"
     ]
   }
 }
