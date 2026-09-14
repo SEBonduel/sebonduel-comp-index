@@ -78,7 +78,7 @@
       {
         "level": "II",
         "left": "Suspension tout-terrain",
-        "right": "Suspension allégée",
+        "right": "Suspension légère",
         "pick": "right"
       },
       {
@@ -90,19 +90,19 @@
       {
         "level": "V",
         "left": "Isolation phonique",
-        "right": "Entraînement électrique du périscope",
+        "right": "Motorisation électrique du périscope",
         "pick": "right"
       },
       {
         "level": "VII",
-        "left": "Recâblage de l'alimentation (Config 1)",
-        "right": "Recâblage de l'alimentation (Config 2)",
+        "left": "Recâblage de l'alimentation électrique (réglage 1)",
+        "right": "Recâblage de l'alimentation électrique (réglage 2)",
         "pick": "left"
       },
       {
         "level": "VIII",
         "left": "Plateforme renforcée",
-        "right": "Plateforme allégée",
+        "right": "Plateforme légère",
         "pick": "right"
       }
     ],
