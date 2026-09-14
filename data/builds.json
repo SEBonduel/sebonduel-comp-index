@@ -63,6 +63,14 @@
           "Système d'amélioration de la mobilité Niv. 3",
           "Crampons de chenilles supplémentaires"
         ]
+      },
+      {
+        "label": "Alternative expérimentale 2",
+        "slots": [
+          "Gamme d'amélioration de la survie Niv. 3",
+          "Système d'amélioration de la mobilité Niv. 3",
+          "Système de chargement innovant"
+        ]
       }
     ],
     "role": "Lourd de percée",
