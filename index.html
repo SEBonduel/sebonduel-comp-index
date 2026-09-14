@@ -56,10 +56,13 @@
   /* Couche 3 : effets (silhouette char en filigrane + balayage + scanlines) */
   #fx { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
     background: repeating-linear-gradient(0deg, rgba(160,190,255,.014) 0 1px, transparent 1px 3px); }
+  /* Filigrane : le char survolé (piloté par --wm / --wm-op depuis le JS). */
   #fx::before {
-    content: ""; position: absolute; right: -3%; bottom: -10%; width: 640px; height: 640px;
-    background: url('https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/vehicle/germany-G42_Maus.png') no-repeat center / contain;
-    filter: grayscale(1) brightness(1.6); opacity: .06; transform: scaleX(-1);
+    content: ""; position: absolute; right: -3%; bottom: -10%; width: 660px; height: 660px;
+    background-image: var(--wm, none);
+    background-repeat: no-repeat; background-position: center; background-size: contain;
+    filter: grayscale(1) brightness(1.6); transform: scaleX(-1);
+    opacity: var(--wm-op, 0); transition: opacity .35s ease;
   }
   #fx::after {
     content: ""; position: absolute; top: -50%; left: 0; width: 45%; height: 200%;
@@ -560,6 +563,7 @@
       const c = document.createElement("div");
       c.className = "card";
       c.style.setProperty("--tc", TYPE_COLOR[t.type] || "var(--line)");
+      c.dataset.icon = t.icon;
       c.style.transitionDelay = ((i % 6) * 45) + "ms";  // cascade par rangée
       const pct = buildPct(t.slug);
       const ind = pct > 0
@@ -771,6 +775,7 @@
   gridEl.addEventListener("pointermove", (e) => {
     const card = e.target.closest(".card");
     if (tilted && tilted !== card) tilted.style.transform = "";
+    if (card !== tilted) setWatermark(card && card.dataset.icon);
     if (!card) { tilted = null; return; }
     const r = card.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5;
@@ -781,7 +786,14 @@
   });
   gridEl.addEventListener("pointerleave", () => {
     if (tilted) { tilted.style.transform = ""; tilted = null; }
+    setWatermark(null);
   });
+  // Filigrane de fond = char actuellement survolé (s'efface en sortie).
+  function setWatermark(icon) {
+    const s = document.documentElement.style;
+    if (icon) { s.setProperty("--wm", `url("${icon}")`); s.setProperty("--wm-op", ".09"); }
+    else { s.setProperty("--wm-op", "0"); }
+  }
 
   // Compteurs animés (count-up) du header.
   function countUp(node, target) {
