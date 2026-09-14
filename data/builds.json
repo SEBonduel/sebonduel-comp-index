@@ -452,6 +452,22 @@
           "Bloc d'échappement furtif"
         ]
       }
+    ],
+    "crew": [
+      {
+        "role": "Commandant",
+        "skills": [
+          "Frères d'armes",
+          "Dissimulation",
+          "Réparations",
+          "Œil de lynx",
+          "Urgence",
+          "Coordination",
+          "Intuition",
+          "Réglage des munitions",
+          "Charge parfaite"
+        ]
+      }
     ]
   },
   "manticore": {
