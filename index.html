@@ -301,7 +301,10 @@
   .slot .bondmk svg { width: 10px; height: 10px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
-    padding: 6px 13px; font-size: 14px; font-weight: 600; }
+    padding: 6px 13px; font-size: 14px; font-weight: 600;
+    display: inline-flex; align-items: center; }
+  .chip .cbic { width: 22px; height: 22px; object-fit: contain; margin-right: 8px;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.7)); }
   .ammo { font-family: "Orbitron", sans-serif; font-size: 16px; font-weight: 700; color: var(--gold);
     letter-spacing: 1px; }
   .note { background: linear-gradient(90deg, rgba(51,230,255,.08), transparent);
@@ -391,7 +394,7 @@
 "use strict";
 (function () {
   const el = (id) => document.getElementById(id);
-  const state = { tanks: [], builds: {}, equipment: [], crewskills: [], meta: new Set(),
+  const state = { tanks: [], builds: {}, equipment: [], crewskills: [], consumables: [], meta: new Set(),
                   listMode: "all", nations: [], types: [], q: "", onlyBuilds: false };
 
   const TYPE_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
@@ -638,6 +641,25 @@
       ).join("");
     return crewSlots(crew);
   }
+  // Résout l'icône d'un consommable (nom ou alias).
+  function consumIcon(text) {
+    const t = norm(text);
+    let best = null, len = 0;
+    for (const c of state.consumables) {
+      for (const a of [c.name, ...(c.aliases || [])]) {
+        const na = norm(a);
+        if (na && t.includes(na) && na.length > len) { best = c.icon; len = na.length; }
+      }
+    }
+    return best;
+  }
+  function consumChips(arr) {
+    return `<div class="chips">` + arr.map((s) => {
+      const ic = consumIcon(s);
+      return `<span class="chip">` +
+        (ic ? `<img class="cbic" src="${ic}" alt="">` : "") + s + `</span>`;
+    }).join("") + `</div>`;
+  }
   function chips(arr) {
     return `<div class="chips">` + arr.map((s) => `<span class="chip">${s}</span>`).join("") + `</div>`;
   }
@@ -682,7 +704,7 @@
           (multi || s.label ? `<div class="setup-label">${s.label || "Compo"}</div>` : "") +
           equipSlots(s.slots)).join("");
       if (b.consumables?.length)
-        c += `<div class="section"><h3>Consommables</h3>${chips(b.consumables)}</div>`;
+        c += `<div class="section"><h3>Consommables</h3>${consumChips(b.consumables)}</div>`;
       if (b.ammo)
         c += `<div class="section"><h3>Obus</h3><div class="ammo">${b.ammo}</div></div>`;
       tabs.push({ k: "equip", label: "Équipements", html: c });
@@ -807,13 +829,15 @@
     fetch("data/builds.json").then((r) => r.json()).catch(() => ({})),
     fetch("data/equipment.json").then((r) => r.json()).catch(() => ([])),
     fetch("data/crewskills.json").then((r) => r.json()).catch(() => ([])),
+    fetch("data/consumables.json").then((r) => r.json()).catch(() => ([])),
     fetch("data/meta.json").then((r) => r.json()).catch(() => ([])),
-  ]).then(([tanks, builds, equipment, crewskills, meta]) => {
+  ]).then(([tanks, builds, equipment, crewskills, consumables, meta]) => {
     state.tanks = tanks;
     delete builds._schema;
     state.builds = builds;
     state.equipment = equipment;
     state.crewskills = crewskills;
+    state.consumables = consumables;
     state.meta = new Set(meta);
     buildFilters();
     render();

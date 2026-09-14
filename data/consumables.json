@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Grande trousse de premiers secours",
+    "aliases": [
+      "trousse de secours",
+      "grande trousse",
+      "trousse",
+      "medkit",
+      "premiers secours"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/largeMedkit.png"
+  },
+  {
+    "name": "Petite trousse de premiers secours",
+    "aliases": [
+      "petite trousse"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/smallMedkit.png"
+  },
+  {
+    "name": "Grand kit de réparation",
+    "aliases": [
+      "kit de reparation",
+      "kit de réparation",
+      "grand kit",
+      "repairkit",
+      "reparation"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/largeRepairkit.png"
+  },
+  {
+    "name": "Petit kit de réparation",
+    "aliases": [
+      "petit kit"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/smallRepairkit.png"
+  },
+  {
+    "name": "Extincteur automatique",
+    "aliases": [
+      "extincteur automatique",
+      "extincteur auto"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/autoExtinguishers.png"
+  },
+  {
+    "name": "Extincteur manuel",
+    "aliases": [
+      "extincteur manuel",
+      "extincteur"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/handExtinguishers.png"
+  },
+  {
+    "name": "Rations de combat supplémentaires",
+    "aliases": [
+      "ration de combat",
+      "rations de combat",
+      "ration",
+      "rations",
+      "vivres"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration.png"
+  },
+  {
+    "name": "Chocolat",
+    "aliases": [
+      "chocolat"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/chocolate.png"
+  },
+  {
+    "name": "Caisse de Cola",
+    "aliases": [
+      "cola"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/cocacola.png"
+  },
+  {
+    "name": "Café fort",
+    "aliases": [
+      "cafe fort",
+      "café fort"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/hotCoffee.png"
+  },
+  {
+    "name": "Pudding et thé",
+    "aliases": [
+      "pudding"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration_uk.png"
+  },
+  {
+    "name": "Onigiri",
+    "aliases": [
+      "onigiri"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration_japan.png"
+  },
+  {
+    "name": "Rations de combat améliorées",
+    "aliases": [
+      "rations ameliorees"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration_china.png"
+  },
+  {
+    "name": "Spaghetti bolognaise",
+    "aliases": [
+      "spaghetti"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration_italy.png"
+  },
+  {
+    "name": "Tartines de Smalec",
+    "aliases": [
+      "smalec",
+      "tartines"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration_poland.png"
+  },
+  {
+    "name": "Buchty",
+    "aliases": [
+      "buchty"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration_czech.png"
+  },
+  {
+    "name": "Café avec brioches à la cannelle",
+    "aliases": [
+      "brioches",
+      "cannelle"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/ration_sweden.png"
+  },
+  {
+    "name": "Récupération",
+    "aliases": [
+      "recuperation",
+      "récupération"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/regenerationKit.png"
+  }
+]
