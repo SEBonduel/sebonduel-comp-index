@@ -318,6 +318,7 @@
       "Ration de combat supplémentaire",
       "Kit de réparation"
     ],
-    "ammo": "20 APCR · 16 HEAT · 4 HE"
+    "ammo": "20 APCR · 16 HEAT · 4 HE",
+    "role": "Lourd polyvalent"
   }
 }
