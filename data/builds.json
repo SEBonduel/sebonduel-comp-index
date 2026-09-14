@@ -248,38 +248,6 @@
       "Trousse de soin"
     ],
     "note": "Très fort en burst sur des cross, très mobile et souvent joué en binôme.",
-    "fieldModsTree": [
-      {
-        "level": "II",
-        "left": "Suspension tout-terrain",
-        "right": "Suspension légère",
-        "pick": "right"
-      },
-      {
-        "level": "IV",
-        "left": "Ajustement de parallaxe",
-        "right": "Rodage des engrenages de visée",
-        "pick": "left"
-      },
-      {
-        "level": "V",
-        "left": "Isolation phonique",
-        "right": "Motorisation électrique du périscope",
-        "pick": "right"
-      },
-      {
-        "level": "VII",
-        "left": "Puissance de feu avant tout",
-        "right": "",
-        "pick": "left"
-      },
-      {
-        "level": "VIII",
-        "left": "Canon lourd",
-        "right": "",
-        "pick": "left"
-      }
-    ],
     "role": "Lourd de burst"
   },
   "obj-260": {
@@ -516,38 +484,6 @@
           "Lutte contre les incendies",
           "Expert en communications"
         ]
-      }
-    ],
-    "fieldModsTree": [
-      {
-        "level": "",
-        "left": "Ajustement de valves (réglage 2)",
-        "right": "",
-        "pick": "left"
-      },
-      {
-        "level": "",
-        "left": "Ajustement du mécanisme de visée",
-        "right": "",
-        "pick": "left"
-      },
-      {
-        "level": "",
-        "left": "Protection anti-éclats renforcée",
-        "right": "",
-        "pick": "left"
-      },
-      {
-        "level": "",
-        "left": "Motorisation électrique du périscope",
-        "right": "",
-        "pick": "left"
-      },
-      {
-        "level": "",
-        "left": "Appareil d'observation à angle droit",
-        "right": "",
-        "pick": "left"
       }
     ],
     "ammo": "16 APCR · 10 HEAT · 10 HE",
