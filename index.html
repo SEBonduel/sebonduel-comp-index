@@ -36,10 +36,7 @@
     background-size: 48px 48px, 48px 48px, 48px 48px;
     background-position: 0 0, 0 0, 24px 24px;
     mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, #000 55%, transparent 92%);
-    animation: drift 50s linear infinite;
   }
-  @keyframes drift { from { background-position: 0 0, 0 0, 24px 24px; }
-                     to { background-position: 48px 96px, 96px 48px, 72px 120px; } }
   /* Couche 2 : orbes lumineux qui dérivent lentement */
   body::after {
     content: ""; position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden;
@@ -47,11 +44,11 @@
       radial-gradient(420px 420px at 18% 30%, rgba(51,230,255,.10), transparent 70%),
       radial-gradient(360px 360px at 82% 68%, rgba(255,207,63,.09), transparent 70%),
       radial-gradient(300px 300px at 60% 12%, rgba(155,123,255,.09), transparent 70%);
-    animation: float 26s ease-in-out infinite alternate;
+    animation: float 60s ease-in-out infinite alternate;
   }
   @keyframes float {
     from { transform: translate3d(0,0,0) scale(1); }
-    to { transform: translate3d(-3%, 4%, 0) scale(1.08); }
+    to { transform: translate3d(-1.5%, 2%, 0) scale(1.03); }
   }
   /* Couche 3 : effets (silhouette char en filigrane + balayage + scanlines) */
   #fx { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
@@ -67,7 +64,7 @@
   #fx::after {
     content: ""; position: absolute; top: -50%; left: 0; width: 45%; height: 200%;
     background: linear-gradient(90deg, transparent, rgba(51,230,255,.07), transparent);
-    transform: rotate(16deg); animation: sweep 16s linear infinite;
+    transform: rotate(16deg); animation: sweep 30s linear infinite;
   }
   @keyframes sweep {
     0% { transform: translateX(-120%) rotate(16deg); }
@@ -76,10 +73,15 @@
   /* Particules ambiantes (canvas) */
   #particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
   /* Halo lumineux qui suit la souris */
-  #halo { position: fixed; inset: 0; z-index: -1; pointer-events: none; will-change: background;
-    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 25%),
-      rgba(51,230,255,.10), rgba(51,230,255,.03) 40%, transparent 62%); }
+  #halo { position: fixed; top: 0; left: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px;
+    z-index: -1; pointer-events: none; border-radius: 50%; will-change: transform;
+    background: radial-gradient(circle, rgba(51,230,255,.10), rgba(51,230,255,.03) 42%, transparent 64%);
+    transform: translate3d(50vw, 25vh, 0); }
   #fx, #particles { will-change: transform; }
+  @media (prefers-reduced-motion: reduce) {
+    body::after, #fx::after { animation: none; }
+    #particles { display: none; }
+  }
   a { color: var(--gold); text-decoration: none; }
   .flag-img { width: 17px; height: 13px; border-radius: 2px; object-fit: cover;
     vertical-align: -2px; margin-right: 5px; box-shadow: 0 0 0 1px rgba(0,0,0,.35); }
@@ -819,20 +821,23 @@
     });
     const resize = () => {
       w = cv.width = innerWidth; h = cv.height = innerHeight;
-      parts = Array.from({ length: Math.min(64, Math.floor(w * h / 26000)) }, spawn);
+      parts = Array.from({ length: Math.min(28, Math.floor(w * h / 60000)) }, spawn);
     };
-    const tick = () => {
+    // ~30 fps, sans shadowBlur (très coûteux) : simple disque translucide.
+    let last = 0;
+    const tick = (now) => {
+      requestAnimationFrame(tick);
+      if (now - last < 33) return;
+      last = now;
       ctx.clearRect(0, 0, w, h);
       for (const p of parts) {
         p.x += p.vx; p.y += p.vy;
         if (p.y < -6) { p.y = h + 6; p.x = Math.random() * w; }
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283);
-        ctx.shadowBlur = 8; ctx.shadowColor = "rgba(" + p.c + ",0.7)";
         ctx.fillStyle = "rgba(" + p.c + "," + p.a + ")"; ctx.fill();
       }
-      requestAnimationFrame(tick);
     };
-    addEventListener("resize", resize); resize(); tick();
+    addEventListener("resize", resize); resize(); requestAnimationFrame(tick);
   })();
 
   // Halo qui suit la souris + parallax du décor.
@@ -842,12 +847,9 @@
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = 0;
-      const halo = el("halo");
-      halo.style.setProperty("--mx", mX + "px");
-      halo.style.setProperty("--my", mY + "px");
+      el("halo").style.transform = `translate3d(${mX}px, ${mY}px, 0)`;
       const dx = mX / innerWidth - 0.5, dy = mY / innerHeight - 0.5;
-      el("fx").style.transform = `translate(${dx * -20}px, ${dy * -20}px)`;
-      el("particles").style.transform = `translate(${dx * -9}px, ${dy * -9}px)`;
+      el("fx").style.transform = `translate3d(${dx * -12}px, ${dy * -12}px, 0)`;
     });
   });
 
