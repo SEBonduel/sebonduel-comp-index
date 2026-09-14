@@ -489,6 +489,17 @@
           "Pilote tout-terrain",
           "Bélier"
         ]
+      },
+      {
+        "role": "Opérateur radio",
+        "skills": [
+          "Frères d'armes",
+          "Dissimulation",
+          "Réparations",
+          "Longue-vue",
+          "Lutte contre les incendies",
+          "Expert en communications"
+        ]
       }
     ]
   },
