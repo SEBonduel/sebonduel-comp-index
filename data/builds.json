@@ -309,6 +309,12 @@
         "right": "Plateforme légère",
         "pick": "right"
       }
-    ]
+    ],
+    "consumables": [
+      "Trousse de secours",
+      "Ration de combat supplémentaire",
+      "Kit de réparation"
+    ],
+    "ammo": "20 APCR · 16 HEAT · 4 HE"
   }
 }
