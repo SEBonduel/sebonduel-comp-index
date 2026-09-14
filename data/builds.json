@@ -467,6 +467,17 @@
           "Réglage des munitions",
           "Charge parfaite"
         ]
+      },
+      {
+        "role": "Tireur",
+        "skills": [
+          "Frères d'armes",
+          "Dissimulation",
+          "Réparations",
+          "Précision",
+          "Coup mortel",
+          "Rancunier"
+        ]
       }
     ]
   },
