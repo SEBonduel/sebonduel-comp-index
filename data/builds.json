@@ -94,11 +94,11 @@
       {
         "role": "Commandant",
         "skills": [
-          "Réparations",
           "Frères d'armes",
-          "Sixième sens",
-          "Dissimulation",
+          "Réparations",
           "Œil de lynx",
+          "Urgence",
+          "Coordination",
           "Praticité"
         ]
       },
