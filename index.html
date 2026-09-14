@@ -379,7 +379,7 @@
       <button class="ddbtn" id="ddTypeBtn"><span>Types</span> <b class="ddcount"></b><i class="caret">▾</i></button>
       <div class="ddpanel" id="ddTypePanel"></div>
     </div>
-    <div class="pill" id="onlyBuilds">✓ Avec build</div>
+    <div class="pill" id="onlyBuilds">✓ Avec build (≥50%)</div>
     <button class="ddbtn ghost" id="resetFilters">Réinitialiser</button>
     <div class="count" id="count"></div>
   </div>
@@ -458,7 +458,9 @@
       .filter((s) => s && (s.slots || []).some(Boolean))
       .map((s) => ({ label: s.label || "", slots: (s.slots || []).filter(Boolean) }));
   }
-  const hasBuild = (slug) => buildPct(slug) > 0;
+  // Seuil à partir duquel un char est considéré « avec build » (compteur + filtre).
+  const BUILD_MIN = 50;
+  const hasBuild = (slug) => buildPct(slug) >= BUILD_MIN;
   // % de complétion d'un build (6 sections possibles).
   function buildPct(slug) {
     const b = state.builds[slug];
