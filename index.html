@@ -61,6 +61,10 @@
     filter: grayscale(1) brightness(1.6); transform: scaleX(-1);
     opacity: var(--wm-op, 0); transition: opacity .35s ease;
   }
+  /* Variante : filigrane en haut à gauche (alterne au survol). */
+  #fx.wm-tl::before {
+    right: auto; bottom: auto; left: -3%; top: -10%; transform: scaleX(1);
+  }
   #fx::after {
     content: ""; position: absolute; top: -50%; left: 0; width: 45%; height: 200%;
     background: linear-gradient(90deg, transparent, rgba(51,230,255,.07), transparent);
@@ -791,10 +795,17 @@
     setWatermark(null);
   });
   // Filigrane de fond = char actuellement survolé (s'efface en sortie).
+  let wmSide = 0;
   function setWatermark(icon) {
     const s = document.documentElement.style;
-    if (icon) { s.setProperty("--wm", `url("${icon}")`); s.setProperty("--wm-op", ".09"); }
-    else { s.setProperty("--wm-op", "0"); }
+    if (icon) {
+      wmSide ^= 1;                                  // alterne bas-droite / haut-gauche
+      el("fx").classList.toggle("wm-tl", wmSide === 1);
+      s.setProperty("--wm", `url("${icon}")`);
+      s.setProperty("--wm-op", ".09");
+    } else {
+      s.setProperty("--wm-op", "0");
+    }
   }
 
   // Compteurs animés (count-up) du header.
