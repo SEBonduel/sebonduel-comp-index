@@ -533,7 +533,8 @@
         "right": "",
         "pick": "left"
       }
-    ]
+    ],
+    "ammo": "16 APCR · 10 HEAT · 10 HE"
   },
   "manticore": {
     "equipment": [
