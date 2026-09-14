@@ -150,6 +150,7 @@
     "name": "Crampons de chenilles",
     "aliases": [
       "crampons",
+      "crampon",
       "grousers",
       "chenilles"
     ],
@@ -288,5 +289,41 @@
     ],
     "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/improvedSights.png",
     "bond": true
+  },
+  {
+    "name": "Système d'amélioration de la mobilité",
+    "aliases": [
+      "amelioration de la mobilite",
+      "systeme d'amelioration de la mobilite"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/modernizedTurbochargerRotationMechanism.png",
+    "bond": false
+  },
+  {
+    "name": "Gamme d'amélioration de la survie",
+    "aliases": [
+      "amelioration de la survie",
+      "gamme d'amelioration de la survie"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/modernizedExtraHealthReserveAntifragmentationLining.png",
+    "bond": false
+  },
+  {
+    "name": "Système de contrôle de tir",
+    "aliases": [
+      "controle de tir",
+      "systeme de controle de tir"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/modernizedAimDrivesAimingStabilizer.png",
+    "bond": false
+  },
+  {
+    "name": "Système d'amélioration de la précision",
+    "aliases": [
+      "amelioration de la precision",
+      "systeme d'amelioration de la precision"
+    ],
+    "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/artefact/modernizedImprovedSightsEnhancedAimDrives.png",
+    "bond": false
   }
 ]

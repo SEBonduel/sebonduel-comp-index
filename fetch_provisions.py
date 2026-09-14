@@ -42,7 +42,7 @@ CURATION = [
     ("stereoscope", "Télescope binoculaire",
      ["binoculaire", "binocs", "télescope", "telescope", "stereoscope", "jumelles"]),
     ("grousers", "Crampons de chenilles",
-     ["crampons", "grousers", "chenilles"]),
+     ["crampons", "crampon", "grousers", "chenilles"]),
     ("improvedConfiguration", "Configuration modifiée",
      ["config", "configuration", "wet ammo", "munitions", "configuration modifiée"]),
     ("improvedSights", "Visée améliorée",
@@ -63,6 +63,16 @@ CURATION = [
     ("deluxeStereoscope", "Système d'observation télescopique", ["observation telescopique"]),
     ("deluxImprovedConfiguration", "Configuration améliorée", ["configuration amelioree"]),
     ("deluxeImprovedSights", "Ciblage innovant", ["ciblage innovant"]),
+
+    # --- Équipements MODERNISÉS (combinés, Niv. 1 à 3) ---
+    ("modernizedTurbochargerRotationMechanism", "Système d'amélioration de la mobilité",
+     ["amelioration de la mobilite", "systeme d'amelioration de la mobilite"]),
+    ("modernizedExtraHealthReserveAntifragmentationLining", "Gamme d'amélioration de la survie",
+     ["amelioration de la survie", "gamme d'amelioration de la survie"]),
+    ("modernizedAimDrivesAimingStabilizer", "Système de contrôle de tir",
+     ["controle de tir", "systeme de controle de tir"]),
+    ("modernizedImprovedSightsEnhancedAimDrives", "Système d'amélioration de la précision",
+     ["amelioration de la precision", "systeme d'amelioration de la precision"]),
 ]
 
 

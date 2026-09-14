@@ -55,6 +55,14 @@
           "Crampons de chenilles supplémentaires",
           "Résistance accrue de la coque"
         ]
+      },
+      {
+        "label": "Alternative expérimentale 1",
+        "slots": [
+          "Gamme d'amélioration de la survie Niv. 3",
+          "Système d'amélioration de la mobilité Niv. 3",
+          "Crampons de chenilles supplémentaires"
+        ]
       }
     ],
     "role": "Lourd de percée",
