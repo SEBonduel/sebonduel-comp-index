@@ -184,5 +184,99 @@
         ]
       }
     ]
+  },
+  "obj-260": {
+    "equipment": [
+      {
+        "label": "Assaut",
+        "slots": [
+          "Compresseur amélioré",
+          "Système de chargement innovant",
+          "Résistance accrue de la coque"
+        ]
+      },
+      {
+        "label": "Mobilité",
+        "slots": [
+          "Compresseur amélioré",
+          "Crampons de chenilles supplémentaires",
+          "Résistance accrue de la coque"
+        ]
+      },
+      {
+        "label": "Alternative expérimentale 1",
+        "slots": [
+          "Gamme d'amélioration de la survie Niv. 3",
+          "Système d'amélioration de la mobilité Niv. 3",
+          "Crampons de chenilles supplémentaires"
+        ]
+      },
+      {
+        "label": "Alternative expérimentale 2",
+        "slots": [
+          "Gamme d'amélioration de la survie Niv. 3",
+          "Système d'amélioration de la mobilité Niv. 3",
+          "Système de chargement innovant"
+        ]
+      }
+    ],
+    "crew": [
+      {
+        "role": "Commandant",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Œil de lynx",
+          "Urgence",
+          "Coordination",
+          "Praticité"
+        ]
+      },
+      {
+        "role": "Tireur",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Précision",
+          "Visée rapide",
+          "Coup mortel",
+          "Armurier"
+        ]
+      },
+      {
+        "role": "Pilote",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Conduite souple",
+          "Bélier",
+          "Pilote tout-terrain",
+          "As du volant"
+        ]
+      },
+      {
+        "role": "Chargeur 1",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Intuition",
+          "Râtelier sécurisé",
+          "Réglage des munitions",
+          "Combat rapproché"
+        ]
+      },
+      {
+        "role": "Chargeur 2",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Intuition",
+          "Râtelier sécurisé",
+          "Réglage des munitions",
+          "Combat rapproché"
+        ]
+      }
+    ],
+    "note": "Char très polyvalent, mobile et blindage fiable, il servira surtout pour rush ou prendre des positions avancées rapidement en début de bataille."
   }
 }
