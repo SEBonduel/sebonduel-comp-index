@@ -277,6 +277,38 @@
         ]
       }
     ],
-    "note": "Char très polyvalent, mobile et blindage fiable, il servira surtout pour rush ou prendre des positions avancées rapidement en début de bataille."
+    "note": "Char très polyvalent, mobile et blindage fiable, il servira surtout pour rush ou prendre des positions avancées rapidement en début de bataille.",
+    "fieldModsTree": [
+      {
+        "level": "II",
+        "left": "Suspension tout-terrain",
+        "right": "Suspension légère",
+        "pick": "right"
+      },
+      {
+        "level": "IV",
+        "left": "Ajustement de parallaxe",
+        "right": "Rodage des engrenages de visée",
+        "pick": "left"
+      },
+      {
+        "level": "V",
+        "left": "Isolation phonique",
+        "right": "Motorisation électrique du périscope",
+        "pick": "right"
+      },
+      {
+        "level": "VII",
+        "left": "Recâblage de l'alimentation électrique (réglage 1)",
+        "right": "Recâblage de l'alimentation électrique (réglage 2)",
+        "pick": "left"
+      },
+      {
+        "level": "VIII",
+        "left": "Plateforme renforcée",
+        "right": "Plateforme légère",
+        "pick": "right"
+      }
+    ]
   }
 }
