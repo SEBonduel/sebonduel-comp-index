@@ -170,7 +170,8 @@
       "Trousse de secours",
       "Ration de combat supplémentaire",
       "Kit de réparation"
-    ]
+    ],
+    "ammo": "25 APCR · 3 HE"
   },
   "amx-50-b": {
     "equipment": [
