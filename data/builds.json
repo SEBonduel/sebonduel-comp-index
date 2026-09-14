@@ -501,6 +501,38 @@
           "Expert en communications"
         ]
       }
+    ],
+    "fieldModsTree": [
+      {
+        "level": "",
+        "left": "Ajustement de valves (réglage 2)",
+        "right": "",
+        "pick": "left"
+      },
+      {
+        "level": "",
+        "left": "Ajustement du mécanisme de visée",
+        "right": "",
+        "pick": "left"
+      },
+      {
+        "level": "",
+        "left": "Protection anti-éclats renforcée",
+        "right": "",
+        "pick": "left"
+      },
+      {
+        "level": "",
+        "left": "Motorisation électrique du périscope",
+        "right": "",
+        "pick": "left"
+      },
+      {
+        "level": "",
+        "left": "Appareil d'observation à angle droit",
+        "right": "",
+        "pick": "left"
+      }
     ]
   },
   "manticore": {
