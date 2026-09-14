@@ -105,11 +105,11 @@
       {
         "role": "Tireur",
         "skills": [
-          "Réparations",
           "Frères d'armes",
-          "Visée rapide",
+          "Réparations",
           "Précision",
-          "Coordination",
+          "Visée rapide",
+          "Coup mortel",
           "Armurier"
         ]
       },
