@@ -171,7 +171,8 @@
       "Ration de combat supplémentaire",
       "Kit de réparation"
     ],
-    "ammo": "25 APCR · 3 HE"
+    "ammo": "25 APCR · 3 HE",
+    "note": "Char très polyvalent, mobile et blindage fiable, il servira surtout pour rush ou prendre des positions avancées rapidement en début de bataille."
   },
   "amx-50-b": {
     "equipment": [
