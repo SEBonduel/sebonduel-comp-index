@@ -209,6 +209,17 @@
           "Maîtrise du barillet",
           "Charge parfaite"
         ]
+      },
+      {
+        "role": "Pilote",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Conduite souple",
+          "Pilote tout-terrain",
+          "Bélier",
+          "As du volant"
+        ]
       }
     ]
   },
