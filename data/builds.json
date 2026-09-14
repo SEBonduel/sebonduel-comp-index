@@ -220,6 +220,17 @@
           "Bélier",
           "As du volant"
         ]
+      },
+      {
+        "role": "Opérateur radio",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Longue-vue",
+          "Lutte contre les incendies",
+          "Côte à côte",
+          "Expert en communications"
+        ]
       }
     ]
   },
