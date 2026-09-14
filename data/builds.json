@@ -478,6 +478,17 @@
           "Coup mortel",
           "Rancunier"
         ]
+      },
+      {
+        "role": "Pilote",
+        "skills": [
+          "Frères d'armes",
+          "Dissimulation",
+          "Réparations",
+          "Conduite souple",
+          "Pilote tout-terrain",
+          "Bélier"
+        ]
       }
     ]
   },
