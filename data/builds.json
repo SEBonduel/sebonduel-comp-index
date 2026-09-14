@@ -195,6 +195,20 @@
           "Coordination",
           "Praticité"
         ]
+      },
+      {
+        "role": "Tireur",
+        "skills": [
+          "Frères d'armes",
+          "Réparations",
+          "Visée rapide",
+          "Coup mortel",
+          "Précision",
+          "Armurier",
+          "Réglage des munitions",
+          "Maîtrise du barillet",
+          "Charge parfaite"
+        ]
       }
     ]
   },
