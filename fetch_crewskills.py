@@ -21,6 +21,9 @@ ALIASES = {
     "radioman_finder": ["détection", "detection", "traqueur"],
     "driver_smoothDriving": ["conduite souple"],
     "gunner_smoothTurret": ["rotation souple"],
+    # L'API renvoie ce nom non traduit ("fireFighting") : on mappe le libellé FR.
+    "fireFighting": ["lutte contre les incendies", "anti-incendie", "incendie",
+                     "extincteur", "pompier"],
 }
 
 

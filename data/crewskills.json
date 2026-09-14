@@ -273,7 +273,13 @@
   {
     "name": "fireFighting",
     "skill": "fireFighting",
-    "aliases": [],
+    "aliases": [
+      "lutte contre les incendies",
+      "anti-incendie",
+      "incendie",
+      "extincteur",
+      "pompier"
+    ],
     "icon": "https://api.worldoftanks.eu/static/2.77.0/wot/encyclopedia/tankmen/skills/big/fireFighting.png"
   },
   {

@@ -138,12 +138,15 @@
       {
         "role": "Chargeur 2",
         "skills": [
-          "Réparations",
           "Frères d'armes",
-          "Râtelier sécurisé",
+          "Réparations",
           "Intuition",
-          "Poussée d'adrénaline",
-          "Urgence"
+          "Râtelier sécurisé",
+          "Réglage des munitions",
+          "Combat rapproché",
+          "Côte à côte",
+          "Lutte contre les incendies",
+          "Longue-vue"
         ]
       }
     ]
