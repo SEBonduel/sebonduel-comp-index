@@ -159,10 +159,14 @@
           "Intuition",
           "Râtelier sécurisé",
           "Réglage des munitions",
-          "Combat rapproché",
-          "Côte à côte",
-          "Lutte contre les incendies",
-          "Longue-vue"
+          "Combat rapproché"
+        ],
+        "bonus": [
+          [
+            "Côte à côte",
+            "Lutte contre les incendies",
+            "Longue-vue"
+          ]
         ]
       }
     ],
@@ -204,10 +208,14 @@
           "Visée rapide",
           "Coup mortel",
           "Précision",
-          "Armurier",
-          "Réglage des munitions",
-          "Maîtrise du barillet",
-          "Charge parfaite"
+          "Armurier"
+        ],
+        "bonus": [
+          [
+            "Réglage des munitions",
+            "Maîtrise du barillet",
+            "Charge parfaite"
+          ]
         ]
       },
       {
@@ -318,10 +326,14 @@
           "Œil de lynx",
           "Urgence",
           "Coordination",
-          "Praticité",
-          "Côte à côte",
-          "Lutte contre les incendies",
-          "Longue-vue"
+          "Praticité"
+        ],
+        "bonus": [
+          [
+            "Côte à côte",
+            "Lutte contre les incendies",
+            "Longue-vue"
+          ]
         ]
       },
       {
@@ -462,10 +474,14 @@
           "Réparations",
           "Œil de lynx",
           "Urgence",
-          "Coordination",
-          "Intuition",
-          "Réglage des munitions",
-          "Charge parfaite"
+          "Coordination"
+        ],
+        "bonus": [
+          [
+            "Intuition",
+            "Réglage des munitions",
+            "Charge parfaite"
+          ]
         ]
       },
       {
@@ -550,6 +566,49 @@
           "Système de vision du chef de char",
           "Optiques expérimentales",
           "Bloc d'échappement furtif"
+        ]
+      }
+    ],
+    "crew": [
+      {
+        "role": "Commandant",
+        "skills": [
+          "Frères d'armes",
+          "Dissimulation",
+          "Œil de lynx",
+          "Réparations",
+          "Coordination",
+          "Urgence"
+        ],
+        "bonus": [
+          [
+            "Précision",
+            "Rancunier",
+            "Visée rapide"
+          ],
+          [
+            "Longue-vue",
+            "Expert en communications",
+            "Lutte contre les incendies"
+          ]
+        ]
+      },
+      {
+        "role": "Pilote",
+        "skills": [
+          "Frères d'armes",
+          "Dissimulation",
+          "Réparations",
+          "Conduite souple",
+          "Ingénieur",
+          "Pilote tout-terrain"
+        ],
+        "bonus": [
+          [
+            "Intuition",
+            "Réglage des munitions",
+            "Charge parfaite"
+          ]
         ]
       }
     ]

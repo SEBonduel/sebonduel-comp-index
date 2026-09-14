@@ -284,6 +284,8 @@
   .crewrole { margin-bottom: 14px; }
   .crolehdr { font-family: "Orbitron", sans-serif; font-size: 11px; letter-spacing: 1px;
     text-transform: uppercase; color: var(--cyan); margin-bottom: 7px; }
+  .bonushdr { font-family: "Orbitron", sans-serif; font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; color: #c39bff; margin: 9px 0 6px; }
   .setup-label { font-family: "Orbitron", sans-serif; font-size: 12px; color: var(--gold); font-weight: 700;
     letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 8px; }
   .slots { display: flex; flex-wrap: wrap; gap: 9px; }
@@ -637,9 +639,14 @@
   function crewRender(crew) {
     if (!crew || !crew.length) return "";
     if (typeof crew[0] === "object")
-      return crew.map((r) =>
-        `<div class="crewrole"><div class="crolehdr">${r.role || ""}</div>${crewSlots(r.skills || [])}</div>`
-      ).join("");
+      return crew.map((r) => {
+        const lignes = r.bonus || [];
+        const blocs = lignes.map((l, i) =>
+          `<div class="bonushdr">Aptitudes bonus${lignes.length > 1 ? " " + (i + 1) : ""}</div>` +
+          crewSlots(l)).join("");
+        return `<div class="crewrole"><div class="crolehdr">${r.role || ""}</div>` +
+          crewSlots(r.skills || []) + blocs + `</div>`;
+      }).join("");
     return crewSlots(crew);
   }
   // Résout l'icône d'un consommable (nom ou alias).
