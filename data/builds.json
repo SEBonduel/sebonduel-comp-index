@@ -534,7 +534,12 @@
         "pick": "left"
       }
     ],
-    "ammo": "16 APCR · 10 HEAT · 10 HE"
+    "ammo": "16 APCR · 10 HEAT · 10 HE",
+    "consumables": [
+      "Kit de réparation",
+      "Café fort",
+      "Trousse de soin"
+    ]
   },
   "manticore": {
     "equipment": [
