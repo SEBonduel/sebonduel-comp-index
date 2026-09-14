@@ -239,7 +239,39 @@
       "Café fort",
       "Trousse de soin"
     ],
-    "note": "Très fort en burst sur des cross, très mobile et souvent joué en binôme."
+    "note": "Très fort en burst sur des cross, très mobile et souvent joué en binôme.",
+    "fieldModsTree": [
+      {
+        "level": "II",
+        "left": "Suspension tout-terrain",
+        "right": "Suspension légère",
+        "pick": "right"
+      },
+      {
+        "level": "IV",
+        "left": "Ajustement de parallaxe",
+        "right": "Rodage des engrenages de visée",
+        "pick": "left"
+      },
+      {
+        "level": "V",
+        "left": "Isolation phonique",
+        "right": "Motorisation électrique du périscope",
+        "pick": "right"
+      },
+      {
+        "level": "VII",
+        "left": "Puissance de feu avant tout",
+        "right": "",
+        "pick": "left"
+      },
+      {
+        "level": "VIII",
+        "left": "Canon lourd",
+        "right": "",
+        "pick": "left"
+      }
+    ]
   },
   "obj-260": {
     "equipment": [

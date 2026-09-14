@@ -323,6 +323,7 @@
     display: flex; align-items: center; justify-content: center; box-shadow: 0 0 16px rgba(255,207,63,.45); }
   .fmlvl.empty { background: transparent; box-shadow: none; }
   .fmopts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .fmopts.solo { grid-template-columns: 1fr; }
   .fmcard { position: relative; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px;
     padding: 13px 11px; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted);
     min-height: 54px; display: flex; align-items: center; justify-content: center; transition: .14s; }
@@ -671,11 +672,16 @@
       return `<div class="fmcard ${picked ? "picked" : ""}"><span>${label || ""}</span>` +
         (picked ? `<i class="chk">✓</i>` : "") + `</div>`;
     };
-    return `<div class="fmtree">` + rows.map((r) =>
-      `<div class="fmrow2">` +
-      `<div class="fmlvl ${r.level ? "" : "empty"}">${r.level || ""}</div>` +
-      `<div class="fmopts">${opt(r, "left")}${opt(r, "right")}</div></div>`
-    ).join("") + `</div>`;
+    return `<div class="fmtree">` + rows.map((r) => {
+      // Si on ne connaît qu'une seule option, on l'affiche sur toute la largeur.
+      const solo = !r.left || !r.right;
+      const body = solo
+        ? `<div class="fmopts solo">${opt(r, r.left ? "left" : "right")}</div>`
+        : `<div class="fmopts">${opt(r, "left")}${opt(r, "right")}</div>`;
+      return `<div class="fmrow2">` +
+        `<div class="fmlvl ${r.level ? "" : "empty"}">${r.level || ""}</div>` +
+        body + `</div>`;
+    }).join("") + `</div>`;
   }
 
   function openModal(t) {
